@@ -279,7 +279,7 @@ func (net *Network) Stop(id discover.NodeID) error {
 // Connect connects two nodes together by calling the "admin_addPeer" RPC
 // method on the "one" node so that it connects to the "other" node
 func (net *Network) Connect(oneID, otherID discover.NodeID) error {
-	log.Debug(fmt.Sprintf("connecting %s to %s", oneID, otherID))
+	log.Info(fmt.Sprintf("lzh connecting %s to %s", oneID, otherID))
 	conn, err := net.InitConn(oneID, otherID)
 	if err != nil {
 		return err
