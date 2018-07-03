@@ -18,7 +18,7 @@ import (
 
 const (
 	NODE_NAME_LENGTH    = 32
-	PERMISSIONED_CONFIG = "permissioned-nodes.conf"
+	PERMISSIONED_CONFIG = "tai.conf"
 )
 
 const middle = "========="
@@ -158,7 +158,7 @@ func parsePermissionedNodes(DataDir string) []*discover.Node {
 	//paths := getCurrentPath()
 
 	if _, err := os.Stat(path); err != nil {
-		log.Error("Read Error for permissioned-nodes.conf file. "  , "This is because 'permissioned' flag is specified but no permissioned-nodes.conf file is present.", "err", err)
+		log.Error("Read Error for tai.conf file. "  , "This is because 'permissioned' flag is specified but no tai.conf file is present.", "err", err)
 		return nil
 	}
 
