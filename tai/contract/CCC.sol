@@ -36,7 +36,7 @@ contract CCC {
     mapping(uint => Ballot) Votes;
     mapping(uint => uint) Members;//Voting success node member
     
- 
+    uint Members_sum_id;
     uint Enode_id;//EnodeID generator, only increasing
     uint Enode_sum_id;//Total number of eNode
     uint Company_id;//CompanyID generator, only increasing
@@ -54,6 +54,7 @@ contract CCC {
         Members[Enode_id]=1;
         Enode_sum_id++;
         Company_sum_id++;
+        Members_sum_id++;
         C_company_stat[_companyname]=1;
         C_enodes_stat[_enode]=1;
         
@@ -87,11 +88,16 @@ contract CCC {
         require(_fromenodeid != _enodeid, "You can't vote for yourself");
         require(C_enodes_stat[C_enodes[_fromenodeid].enodename] == uint(1), "Your vote source eNode does not exist");
         require(C_enodes_stat[C_enodes[_enodeid].enodename] == uint(1), "The vote eNode does not exist");
+        require(Members[_fromenodeid] == uint(1),"Your From_EnodeID is not a selected node");
+        require(Members[_enodeid] != uint(1),"You can't vote for the EnodeID that has become an election node");
         Votes[_enodeid].ticketNum++;
         Votes[_enodeid].voters[msg.sender] = 1;
         C_Ballot_Record[_fromenodeid].record[_enodeid]=1;
-        if(Votes[_enodeid].ticketNum >= Enode_sum_id){
+        if(Votes[_enodeid].ticketNum == Members_sum_id){
             Members[_enodeid]=1;
+            Members_sum_id++;
+            //选举成功数+-1
+            
         }
     }
 //   Add an organization function that already exists and cannot be added
@@ -112,10 +118,12 @@ contract CCC {
                 Enode_sum_id--;
                 delete Members[x];
                 delete C_enodes_stat[C_enodes[x].enodename];
+
                 }
         Company_sum_id--;
         delete C_company_stat[C_company[_companyid].companyname];
         delete C_company[Company_id];
+
         
     }
      
@@ -134,10 +142,11 @@ contract CCC {
  function AddEnode (uint _companyid,string _enodename) public{
         require(C_company[_companyid].owner == msg.sender, "Not a owner");
         require(C_enodes_stat[_enodename] != uint(1), "Already exist");
+
         Enode_id++;
         Enode_sum_id++;
         C_enodes[Enode_id]=Enode({companyid:_companyid,stat:0,enodename:_enodename,owner:msg.sender});
-        Votes[Enode_id].ticketNum++;
+        //Votes[Enode_id].ticketNum++;
         Votes[Enode_id].enodeid=Enode_id;
         Votes[Enode_id].voters[msg.sender] = 1;
         Votes[Enode_id].owner = msg.sender; 
@@ -160,6 +169,7 @@ contract CCC {
         delete C_enodes_stat[C_enodes[_enodeid].enodename];
         Enode_sum_id--;
         delete Members[_enodeid];
+
     }
      
    
@@ -224,6 +234,10 @@ contract CCC {
         if(C_company_stat[C_company[_companyid].companyname]  == 1){
             result = true;
         }
+    }
+    
+     function ShowMembers_sum_id() view public returns(uint R_sum) {
+       R_sum=Members_sum_id;
     }
     
     
