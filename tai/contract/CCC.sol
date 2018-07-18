@@ -1,4 +1,5 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.24;
+//wwq
 contract CCC {
     struct Ballot_Record {
         mapping(uint => uint) record;
@@ -42,6 +43,15 @@ contract CCC {
     uint Company_id;//CompanyID generator, only increasing
     uint Company_sum_id;//Total number of Company
     uint[] Temp;
+
+    event AddCompanyEV(string _companyname,string _email,string _remark);
+    event DelCompanyEV(uint _companyid);
+    event UpdateCompanyEV(uint _companyid,string _email,string _remark,uint _stat);
+    event AddEnodeEV(uint _companyid,string _enodename);
+    event UpdateEnodeEV(uint _enodeid,uint _stat);
+    event DelEnodeEV(uint _enodeid);
+    event VoteEV(uint _fromenodeid,uint _enodeid);
+
  
 //Initializing the entire contract, enodename must be filled in
  
@@ -96,6 +106,7 @@ contract CCC {
         if(Votes[_enodeid].ticketNum == Members_sum_id){
             Members[_enodeid]=1;
             Members_sum_id++;
+            emit VoteEV(_fromenodeid, _enodeid);
             //选举成功数+-1
             
         }
@@ -107,6 +118,8 @@ contract CCC {
         Company_sum_id++;
         C_company[Company_id] = Company({companyname:_companyname, email:_email, remark:_remark,stat:0,owner:msg.sender});
         C_company_stat[_companyname]=1;
+        emit AddCompanyEV( _companyname, _email, _remark);
+
     }
 //Delete the organization function
      function DelCompany  (uint _companyid) public{
@@ -123,7 +136,7 @@ contract CCC {
         Company_sum_id--;
         delete C_company_stat[C_company[_companyid].companyname];
         delete C_company[Company_id];
-
+        emit DelCompanyEV(_companyid);
         
     }
      
@@ -135,6 +148,7 @@ contract CCC {
         C_company[_companyid].email=_email;
         C_company[_companyid].remark=_remark;
         C_company[_companyid].stat=_stat;
+        emit UpdateCompanyEV(_companyid,_email,_remark,_stat);
                  
     }
      
@@ -151,12 +165,14 @@ contract CCC {
         Votes[Enode_id].voters[msg.sender] = 1;
         Votes[Enode_id].owner = msg.sender; 
         C_enodes_stat[_enodename]=1;
+        emit AddEnodeEV(_companyid,_enodename);
     }
 // Change the Enode function
  function UpdateEnode (uint _enodeid,uint _stat) public{
         require(C_enodes[_enodeid].owner == msg.sender, "Not a owner");
         require(C_enodes_stat[C_enodes[_enodeid].enodename] != uint(1), "Not existent");
         C_enodes[_enodeid].stat=_stat;
+        emit UpdateEnodeEV(_enodeid,_stat);
                 
     }
 // Delete the Enode function
@@ -169,7 +185,7 @@ contract CCC {
         delete C_enodes_stat[C_enodes[_enodeid].enodename];
         Enode_sum_id--;
         delete Members[_enodeid];
-
+        emit DelEnodeEV( _enodeid);
     }
      
    
@@ -228,10 +244,24 @@ contract CCC {
             result = true;
         }
     }
+
+    function ShowEnodenameExist(string _enodename) view public returns(bool result) {
+        result = false;
+        if(C_enodes_stat[_enodename] == 1){
+            result = true;
+        }
+    }
     
-    function ShowCompanyExist(uint _companyid) view public returns(bool result) {
+    function ShowCompanyidExist(uint _companyid) view public returns(bool result) {
         result = false;
         if(C_company_stat[C_company[_companyid].companyname]  == 1){
+            result = true;
+        }
+    }
+
+    function ShowCompanynameExist(string _companyname) view public returns(bool result) {
+        result = false;
+        if(C_company_stat[_companyname]  == 1){
             result = true;
         }
     }
