@@ -181,8 +181,8 @@ contract CCC {
  function DelEnode (uint _enodeid) public{
         require(C_enodes[_enodeid].owner == msg.sender, "Not a owner");
         require(C_enodes_stat[C_enodes[_enodeid].enodename] == uint(1), "Not existent");
-        delete C_enodes[_enodeid];
         delete C_enodes_stat[C_enodes[_enodeid].enodename];
+        delete C_enodes[_enodeid];
         Enode_sum_id--;
         emit DelEnodeEV( _enodeid);
     }
@@ -227,8 +227,11 @@ contract CCC {
        sum=Enode_sum_id;
     }
 // Query Company sum    
-    function CompanySum() view public returns (uint sum){
+    function CompanySumID() view public returns (uint sum){
        sum=Company_sum_id;
+    }
+    function CompanySum() view public returns (uint sum){
+       sum=Company_id;
     }
     
     function ShowBallot(uint _companyid) view public returns (uint ticketNum,uint Company_id,uint ownerstat,address own){
