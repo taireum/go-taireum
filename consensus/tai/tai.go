@@ -29,7 +29,7 @@ var (
 	extraVanity = 32
 	extraSeal   = 65
 
-	nonceTai = hexutil.MustDecode("0x0ffffffffffffff0") // Magic nonce number for Tai
+	nonceTai = hexutil.MustDecode("0x00ffffffffffffff") // Magic nonce number for Tai
 
 	uncleHash = types.CalcUncleHash(nil) // Always Keccak256(RLP([])) as uncles are meaningless outside of PoW.
 
@@ -300,6 +300,7 @@ func (t *Tai) Prepare(chain consensus.ChainReader, header *types.Header) error {
 	// If the block isn't a checkpoint, cast a random vote (good enough for now)
 	header.Coinbase = common.Address{}
 	header.Nonce = types.BlockNonce{}
+	copy(header.Nonce[:], nonceTai)
 
 	number := header.Number.Uint64()
 
@@ -419,10 +420,5 @@ func (t *Tai) Seal(chain consensus.ChainReader, block *types.Block, stop <-chan 
 // APIs implements consensus.Engine, returning the user facing RPC API to allow
 // controlling the signer voting.
 func (t *Tai) APIs(chain consensus.ChainReader) []rpc.API {
-	return []rpc.API{{
-		Namespace: "tai",
-		Version:   "not_support_now",
-		Service:   nil,
-		Public:    false,
-	}}
+	return nil
 }

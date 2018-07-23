@@ -15,7 +15,7 @@ func newAuthority(config *params.TaiConfig) *Authority{
 	s := make(map[common.Address]struct{})
 
 	////TODO signer list should be pull from CCC
-	s[common.HexToAddress("0xfcf8fea976c1ffc38e806030045eb76a9652c94a")]=struct{}{}
+	s[common.HexToAddress("0x06a0b23e787ec10bd70b993f52c5f8550f5f5c04")]=struct{}{}
 
 	authority := &Authority{
 		s,
