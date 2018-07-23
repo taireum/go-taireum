@@ -88,3 +88,26 @@
        
     }
 }
+
+//投票
+{
+    "source": "vote",
+    "method": "vote",
+    "argv": {
+        "from": "0x9EEF60Ca2754Be0C8E434C86d81cCaf8a20586C3",
+        "fromcompany": 2,
+      "tocompany":3
+       
+    }
+}
+
+//检查是否投票节点
+{
+    "source": "vote",
+    "method": "check",
+    "argv": {
+        "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+        "companyid": 3
+       
+    }
+}
