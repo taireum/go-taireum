@@ -1,0 +1,113 @@
+//增加公司json 
+{
+    "source": "company",
+    "method": "add",
+    "argv": {
+        "from": "0x9EEF60Ca2754Be0C8E434C86d81cCaf8a20586C3",
+        "companyname": "小泰科技10086",
+        "email": "979857108@qq.com",
+        "remark": "备注"
+    }
+}
+//删除公司
+{
+    "source": "company",
+    "method": "del",
+    "argv": {
+        "from": "0x9EEF60Ca2754Be0C8E434C86d81cCaf8a20586C3",
+        "companyid": 2
+        
+    }
+}
+
+//更新公司
+{
+    "source": "company",
+    "method": "update",
+    "argv": {
+  "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+  "companyid": 1,
+  "email": "10086@tai.com",
+  "remark": "正确的选择",
+  "stat":1
+}
+}
+
+//获取所有公司，缓存用的
+{
+    "source": "company",
+    "method": "getall",
+    "argv": {
+  "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F"
+}
+}
+
+//删除enode
+
+{
+    "source": "enode",
+    "method": "del",
+    "argv": {
+        "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+        "enodeid": 4
+       
+    }
+}
+
+//增加enode
+{
+    "source": "enode",
+    "method": "add",
+    "argv": {
+        "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+        "companyid": 1,
+        "enodename": "enode1"
+       
+    }
+}
+//获取enode信息
+
+{
+    "source": "enode",
+    "method": "get",
+    "argv": {
+        "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+        "enodeid": 7
+       
+    }
+}
+//更新enode
+
+{
+    "source": "enode",
+    "method": "update",
+    "argv": {
+        "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+        "enodeid": 2,
+        "stat":1
+       
+    }
+}
+
+//投票
+{
+    "source": "vote",
+    "method": "vote",
+    "argv": {
+        "from": "0x9EEF60Ca2754Be0C8E434C86d81cCaf8a20586C3",
+        "fromcompany": 2,
+      "tocompany":3
+       
+    }
+}
+
+//检查是否投票节点
+{
+    "source": "vote",
+    "method": "check",
+    "argv": {
+        "from": "0xbf8cB0542f260466e5c9233E8797d98463A9b14F",
+        "companyid": 3
+       
+    }
+}
