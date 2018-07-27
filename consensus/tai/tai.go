@@ -279,7 +279,7 @@ func (t *Tai) verifySeal(chain consensus.ChainReader, header *types.Header, pare
 	if err != nil {
 		return err
 	}
-	if _, ok := t.authority.Signers[signer]; !ok {
+	if _, ok := t.authority.Signers()[signer]; !ok {
 		return errUnauthorized
 	}
 
@@ -297,12 +297,27 @@ func (t *Tai) verifySeal(chain consensus.ChainReader, header *types.Header, pare
 // Prepare implements consensus.Engine, preparing all the consensus fields of the
 // header for running the transactions on top.
 func (t *Tai) Prepare(chain consensus.ChainReader, header *types.Header) error {
-	// If the block isn't a checkpoint, cast a random vote (good enough for now)
-	header.Coinbase = common.Address{}
-	header.Nonce = types.BlockNonce{}
-	copy(header.Nonce[:], nonceTai)
 
 	number := header.Number.Uint64()
+
+	// Ensure the timestamp has the correct delay
+	parent := chain.GetHeader(header.ParentHash, number-1)
+	if parent == nil {
+		return consensus.ErrUnknownAncestor
+	}
+	header.Time = new(big.Int).Add(parent.Time, new(big.Int).SetUint64(t.config.Period))
+	if header.Time.Int64() < time.Now().Unix() {
+		header.Time = big.NewInt(time.Now().Unix())
+	}
+	//set coinbase as vote constract address
+	if (parent.Coinbase != common.Address{}) {
+		header.Coinbase = parent.Coinbase
+	} else {
+		header.Coinbase = t.authority.contractAddress();
+	}
+
+	header.Nonce = types.BlockNonce{}
+	copy(header.Nonce[:], nonceTai)
 
 	// Set the correct difficulty
 	header.Difficulty = t.calcDifficulty(header.Number.Uint64())
@@ -318,15 +333,6 @@ func (t *Tai) Prepare(chain consensus.ChainReader, header *types.Header) error {
 	// Mix digest is reserved for now, set to empty
 	header.MixDigest = common.Hash{}
 
-	// Ensure the timestamp has the correct delay
-	parent := chain.GetHeader(header.ParentHash, number-1)
-	if parent == nil {
-		return consensus.ErrUnknownAncestor
-	}
-	header.Time = new(big.Int).Add(parent.Time, new(big.Int).SetUint64(t.config.Period))
-	if header.Time.Int64() < time.Now().Unix() {
-		header.Time = big.NewInt(time.Now().Unix())
-	}
 	return nil
 }
 
@@ -334,10 +340,10 @@ func (t *Tai) Prepare(chain consensus.ChainReader, header *types.Header) error {
 // that a new block should have based on the previous blocks in the chain and the
 // current signer.
 func (t *Tai) CalcDifficulty(chain consensus.ChainReader, time uint64, parent *types.Header) *big.Int {
-	return t.calcDifficulty(parent.Number.Uint64()+1)
+	return t.calcDifficulty(parent.Number.Uint64() + 1)
 }
 
-func (t *Tai)calcDifficulty(number uint64) *big.Int{
+func (t *Tai) calcDifficulty(number uint64) *big.Int {
 	if t.authority.hostturn(number, t.signer) {
 		return new(big.Int).Set(diffHost)
 	}
@@ -384,8 +390,7 @@ func (t *Tai) Seal(chain consensus.ChainReader, block *types.Block, stop <-chan 
 	signer, signFn := t.signer, t.signerFn
 	t.lock.RUnlock()
 
-
-	if _, authorized := t.authority.Signers[signer]; !authorized {
+	if _, authorized := t.authority.Signers()[signer]; !authorized {
 		return nil, errUnauthorized
 	}
 
@@ -395,7 +400,7 @@ func (t *Tai) Seal(chain consensus.ChainReader, block *types.Block, stop <-chan 
 	delay := time.Unix(header.Time.Int64(), 0).Sub(time.Now()) // nolint: gosimple
 	if header.Difficulty.Cmp(diffGuest) == 0 {
 		// It's not our turn explicitly to sign, delay it a bit
-		wiggle := time.Duration(len(t.authority.Signers)/2+1) * wiggleTime
+		wiggle := time.Duration(len(t.authority.Signers())/2+1) * wiggleTime
 		delay += time.Duration(rand.Int63n(int64(wiggle)))
 
 		log.Trace("Out-of-turn signing requested", "wiggle", common.PrettyDuration(wiggle))
