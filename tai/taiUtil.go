@@ -20,11 +20,11 @@ func ListFromUrl(url string) []string{
 
 	}
 
-	nodelist := []string{}
-	if err := json.Unmarshal(body, &nodelist); err != nil {
+	list := []string{}
+	if err := json.Unmarshal(body, &list); err != nil {
 		log.Error("parse http response failed", "err:", err)
 		return nil
 	}
 
-	return nodelist
+	return list
 }
