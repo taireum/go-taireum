@@ -52,6 +52,7 @@ func (w *wizard) makeGenesis() {
 	fmt.Println("Which consensus engine to use? (default = clique)")
 	fmt.Println(" 1. Ethash - proof-of-work")
 	fmt.Println(" 2. Clique - proof-of-authority")
+	fmt.Println(" 3. Tai - Taireum-consensus-engine")
 
 	choice := w.read()
 	switch {
@@ -59,6 +60,16 @@ func (w *wizard) makeGenesis() {
 		// In case of ethash, we're pretty much done
 		genesis.Config.Ethash = new(params.EthashConfig)
 		genesis.ExtraData = make([]byte, 32)
+
+	case choice == "3":
+		// In the case of Tai, configure the consensus parameters
+		genesis.Difficulty = big.NewInt(1)
+		genesis.Config.Tai = &params.TaiConfig{
+			Period: 15,
+		}
+		fmt.Println()
+		fmt.Println("How many seconds should blocks take? (default = 15)")
+		genesis.Config.Tai.Period = uint64(w.readDefaultInt(15))
 
 	case choice == "" || choice == "2":
 		// In the case of clique, configure the consensus parameters

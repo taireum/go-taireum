@@ -147,9 +147,6 @@ func isNodePermissioned(nodename string, currentNode string, datadir string, dir
 	return false
 }
 
-//this is a shameless copy from the config.go. It is a duplication of the code
-//for the timebeing to allow reload of the permissioned nodes while the server is running
-
 func parsePermissionedNodes(DataDir string) []*discover.Node {
 
 	log.Debug("parsePermissionedNodes", "DataDir", DataDir, "file", PERMISSIONED_CONFIG)
@@ -181,13 +178,6 @@ func parsePermissionedNodes(DataDir string) []*discover.Node {
 
 	}
 
-
-	// Load the nodes from the config file
-	//blob, err := ioutil.ReadFile(path)
-	//if err != nil {
-	//	log.Error("parsePermissionedNodes: Failed to access nodes", "err", err)
-	//	return nil
-	//}
 
 	nodelist := []string{}
 	if err := json.Unmarshal(body, &nodelist); err != nil {
