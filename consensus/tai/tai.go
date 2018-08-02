@@ -30,6 +30,7 @@ var (
 	extraSeal   = 65
 
 	nonceTai = hexutil.MustDecode("0x00ffffffffffffff") // Magic nonce number for Tai
+	nonceCa = hexutil.MustDecode("0xcaffffffffffffff")  //Magic nonce number for CCC contract address
 
 	uncleHash = types.CalcUncleHash(nil) // Always Keccak256(RLP([])) as uncles are meaningless outside of PoW.
 
@@ -309,15 +310,20 @@ func (t *Tai) Prepare(chain consensus.ChainReader, header *types.Header) error {
 	if header.Time.Int64() < time.Now().Unix() {
 		header.Time = big.NewInt(time.Now().Unix())
 	}
+
+	//set nonce as magic number
+	header.Nonce = types.BlockNonce{}
+	copy(header.Nonce[:], nonceTai)
+
 	//set coinbase as vote constract address
 	if (parent.Coinbase != common.Address{}) {
 		header.Coinbase = parent.Coinbase
 	} else {
 		header.Coinbase = t.authority.contractAddress();
+		copy(header.Nonce[:], nonceCa) //reset nonce as ca magic number
 	}
 
-	header.Nonce = types.BlockNonce{}
-	copy(header.Nonce[:], nonceTai)
+
 
 	// Set the correct difficulty
 	header.Difficulty = t.calcDifficulty(header.Number.Uint64())
