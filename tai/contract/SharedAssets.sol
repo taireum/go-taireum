@@ -7,7 +7,7 @@ contract SharedAssets {
         address addr;               //资产发起人账户地址
         bytes32 userHash;           //用户hash
         uint timestamp;             //时间戳
-        string interset;            //日利率
+        uint interset;            //日利率
         uint amount;                //额度
         uint state;                 //资产状态  0-不存在 1-开始投标 2-投标结束 3-选标结束 4-已放款 5-还款结束
         mapping(address => Bid) bids;
@@ -15,7 +15,7 @@ contract SharedAssets {
 
     struct Bid {
         uint timestamp;             //时间戳
-        string interset;            //日利率
+        uint interset;            //日利率
         uint amount;                //额度
         uint deposit;               //保证金
         uint state;                 //资产状态  0-不存在 1-已投标 2-已中标 3-未中标 4-已放款 5-已没收保证金
@@ -26,10 +26,11 @@ contract SharedAssets {
     mapping(address => uint) public deposit;        //账户保证金，已冻结，不可提取
     mapping(bytes32 => address[]) public addrs;
 
-    event AssetAdded(bytes32 _id, bytes32 _userHash, string _interset, uint _amount);
-    event BidAdded(bytes32 _id, address _addr, string _interset, uint _amount, uint _deposit);
+    event AssetAdded(bytes32 _id, bytes32 _userHash, uint _interset, uint _amount);
+    event BidAdded(bytes32 _id, address _addr, uint _interset, uint _amount, uint _deposit);
     event AssetStateChanged(bytes32 _id, uint _state);
     event BidChoosed(bytes32 _id, address[] _addrs, uint[] _states);
+    event Loaned(bytes32 _id, address _addr);
 
     /**
      * Fallback function
@@ -37,17 +38,17 @@ contract SharedAssets {
      * The function without name is the default function that is called whenever anyone sends funds to a contract
      */
     function() public payable {
-        balance[msg.sender] = msg.value;
+        balance[msg.sender] = balance[msg.sender] + msg.value;
     }
 
-    function addAsset(bytes32 _id, bytes32 _userHash, string _interset, uint _amount) public returns(bool) {
+    function addAsset(bytes32 _id, bytes32 _userHash, uint _interset, uint _amount) public returns(bool) {
         require(assets[_id].state == uint(0), "asset already added");
         assets[_id] = Asset({id:_id,addr:msg.sender,userHash:_userHash,timestamp:now,interset:_interset,amount:_amount,state:uint(1)});
         emit AssetAdded(_id, _userHash, _interset, _amount);
         return true;
     }
 
-    function addBid(bytes32 _id, string _interset, uint _amount, uint _deposit) public returns(bool) {
+    function addBid(bytes32 _id, uint _interset, uint _amount, uint _deposit) public returns(bool) {
         require(assets[_id].state == uint(1), "asset not exist or bid already ended");
         require(assets[_id].bids[msg.sender].state == uint(0), "bid already added");
         require(balance[msg.sender] >= _deposit, "not enough balance");
@@ -78,6 +79,7 @@ contract SharedAssets {
     }
 
     function chooseBid(bytes32 _id, address[] _addrs, uint[] _states) public returns(bool) {
+        require(assets[_id].addr == msg.sender, "you have no rignt to change this asset's state");
         require(assets[_id].state == uint(2), "asset not exist or bid not ended");
         require(addrs[_id].length == _addrs.length, "addrs length not equel to asset's bidders addrs length");
         for (uint i = 0; i < _addrs.length; i++) {
@@ -100,11 +102,26 @@ contract SharedAssets {
         deposit[msg.sender] = deposit[msg.sender] - assets[_id].bids[msg.sender].deposit;
         balance[msg.sender] = balance[msg.sender] - (assets[_id].bids[msg.sender].amount - assets[_id].bids[msg.sender].deposit);
         assets[_id].bids[msg.sender].state = uint(4);
+        emit Loaned(_id, msg.sender);
         return true;
     }
 
     function repayment(bytes32 _id) public returns(bool) {
+        require(assets[_id].addr == msg.sender, "you can't repay this asset");
+        uint repayAmount = 0;
+        for (uint i = 0; i < addrs[_id].length; i++) {
+            if (assets[_id].bids[addrs[_id][i]].state == uint(4)) {
+                repayAmount = ((now - assets[_id].timestamp)/86400)*assets[_id].bids[addrs[_id][i]].amount*assets[_id].bids[addrs[_id][i]].interset;
+                require(balance[msg.sender] >= repayAmount, "not enough balance");
+                balance[msg.sender] = balance[msg.sender] - repayAmount;
+                balance[addrs[_id][i]] = balance[addrs[_id][i]] + repayAmount;
+            }
+        }
         changeAssetState(_id, uint(5));
         return true;
+    }
+
+    function withdraw() public returns(bool) {
+        msg.sender.transfer(balance[msg.sender]);
     }
 }
