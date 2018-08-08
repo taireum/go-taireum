@@ -84,7 +84,7 @@ contract CCC {
         }
     }
 
-    //挖矿打包投票 前提必须已经说poa成员
+    //挖矿打包投票 前提必须已经是poa成员
     function VoteMine(uint _fromcompanyid,uint _tocompanyid) public {
         require(_fromcompanyid != _tocompanyid, "from and to eq");
         require(C_Members[C_company[_tocompanyid].owner] == uint(1) ,"_tocompanyid not POA");
@@ -161,7 +161,7 @@ contract CCC {
             result = true;
         }
     }
-    //查询企业的所以信息
+    //查询企业的所有信息
     
     function ShowCompany(uint _companyid) view public returns(string R_companyname, string R_email,string R_remark,address R_owner,string R_enode,uint R_stat) {
         R_companyname=C_company[_companyid].company;
