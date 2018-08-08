@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ ! -e /tmp/clock ];then
+echo "切换目录">>/opt/run.st
+cd /opt/ccc_rest/
+touch /tmp/clock
+echo "touch clock">>/opt/run.st
+source ~/.bash_profile
+node lib/deploy.js
+fi

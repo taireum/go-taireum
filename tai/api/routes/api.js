@@ -1,100 +1,97 @@
 const router = require('koa-router')();
-const Company = require('./../lib/Company');
-const Enode = require('./../lib/Enode');
-const Vote= require('./../lib/Vote');
+const C = require('./../lib/CCC');
+const fs   = require('fs');
 
 
 
 router.prefix('/api');
-const c = new Company;
-const e = new Enode;
-const v = new Vote;
+const c = new C;
+
+router.get('/contrac', function(ctx, next){
+  var data = fs.readFileSync('lib/config.json', 'utf-8');
+  person = JSON.parse(data);//将字符串转换为json对象
+
+  ctx.body =  [ person.contractaddress]
+})
+router.get('/enode', function (ctx, next){
+  var data = fs.readFileSync('lib/member.json', 'utf-8');
+  person = JSON.parse(data);//将字符串转换为json对象
+
+  ctx.body=person
+
+})
+
+router.get('/mine', function(ctx, next){
+  var data = fs.readFileSync('lib/mine.json', 'utf-8');
+
+  person = JSON.parse(data);//将字符串转换为json对象
+
+  ctx.body=person})
+router.get('/company', function(ctx, next){
+  var data = fs.readFileSync('lib/company.json', 'utf-8');
+  person = JSON.parse(data);//将字符串转换为json对象
+
+  ctx.body=person
+ 
+})
+
+router.get('/coinbase', async (ctx, next) =>{
+  ctx.body = await c.coinbase();
+})
 
 
 router.post('/v1', async (ctx, next) => {
  
     try{
         const {source,method,argv} = ctx.request.body;
-        if(source=="company"){
+        if(source=="ccc"){
               if(method=="add"){
                 //添加公司
-                const {from, companyname, email, remark}=argv
-                ctx.body = await c.add_companys(from, companyname, email, remark);
-              } else if (method=="del"){
-                //删除公司
-                const {from,companyid}=argv
-                ctx.body = await c.del_companys(from,companyid);
-
-              }else if (method=="update"){
+                const {_from, _companyname, _email, _remark, _enode,_address}=argv
+                ctx.body = await c.add_companys(_from, _companyname, _email, _remark, _enode,_address);
+              }else if(method=="update"){
                 //更新公司
-                const {from,companyid,email,remark,stat}=argv;
-                ctx.body = await c.update_companys(from,companyid,email,remark,stat);
-
-              }else if (method=="get"){
-                //查询单个公司
-                const {from,companyid}=argv;
-                ctx.body = await c.get_companys(from,companyid);
-
-              }else if (method=="getall"){
-                //获取所有公司
-                const {from}=argv;
-                ctx.body = await c.get_all_companys(from);
-
+                const {_from ,_companyid, _email, _remark, _enode, _stat}=argv
+                ctx.body = await c.update_companys(_from ,_companyid, _email, _remark, _enode, _stat);
+              } else if(method=="vote"){
+                //poa投票
+                const {_from ,_fromcompanyid,_tocompanyid}=argv
+                ctx.body = await c.vote(_from ,_fromcompanyid,_tocompanyid);
+              }else if(method=="minevote"){
+                //挖矿投票
+                const {_from ,_fromcompanyid,_tocompanyid}=argv
+                ctx.body = await c.votemine(_from ,_fromcompanyid,_tocompanyid);
+              }else if(method=="check"){
+                //检查company是否poa
+                const {_from ,_companyid}=argv
+                ctx.body = await c.checkmember(_from ,_companyid);
+              }else if(method=="acheck"){
+                //检查账号
+                const {_from ,_account}=argv
+                ctx.body = await c.checkmemberowner(_from ,_account);
+              } else if(method=="get"){
+                //获取
+                const {_from ,_companyid}=argv
+                ctx.body = await c.getcompany(_from ,_companyid);
+              }else if(method=="setup"){
+                //初始化
+                const {_company, _email, _remark, _chainid,_datadir,_rpcport,_eth_url,_networkid}=argv
+                ctx.body = await c.init_new(_company, _email, _remark, _chainid,_datadir,_rpcport,_eth_url,_networkid);
               }else{
                 ctx.body={"code": 400,"message": "非法的请求method","detail": method}
               }
 
               
-        }else if (source=="enode"){
-              if(method=="add"){
-                //添加enode
-                const {from, companyid,enodename}=argv
-                ctx.body = await e.add_enode(from, companyid,enodename);
-              }else if (method=="del"){
-                //删除enode
-                const {from,enodeid}=argv;
-                ctx.body = await e.del_enode(from,enodeid);
-
-              }else if (method=="update"){
-                //更新enode
-                const {from,enodeid,stat}=argv;
-                ctx.body = await e.update_enode(from,enodeid,stat);
-
-              }else if (method=="get"){
-                //更新enode
-                const {from,enodeid}=argv;
-                ctx.body = await e.get_enode(from,enodeid);
-
-              }else{
-                ctx.body={"code": 400,"message": "非法的请求method","detail": method}
-              }
-
-
-        }else if (source=="vote"){
-          if(method=="vote"){
-            //添加enode
-            const {from, fromcompany,tocompany}=argv
-            ctx.body = await v.CompanyVote(from, fromcompany,tocompany);
-          
-          }else if (method=="check"){
-            //更新enode
-            const {from,companyid}=argv;
-            ctx.body = await v.CheckisMember(from,companyid);
-
-          }else{
-            ctx.body={"code": 400,"message": "非法的请求method","detail": method}
-          }
-
-
-    }else{
-          ctx.body={"code": 400,"message": "非法的请求对象","detail": source}
+        }else{
+          ctx.body={"code": 400,"message": "请求错误","detail": source}
         }
       }catch (err) {
         ctx.body = {'code': 400,message:"请求出错",'detail': 'error:' + err.stack};
     }
 
-  //ctx.body = await c.add_companys(from, companyname, email, remark);
 });
+
+
 
 
 module.exports = router;
