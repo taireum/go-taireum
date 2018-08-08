@@ -36,7 +36,7 @@ func (a *Authority) Signers() map[common.Address]struct{} {
 // the function is called onle once for whole blockchain only in founder node
 func (a *Authority) contractAddress() common.Address {
 	contractAddresses := tai.ListFromUrl(contractUrl)
-	if (contractAddresses != nil && len(contractAddresses) > 1) {
+	if (contractAddresses != nil && len(contractAddresses) >= 1) {
 		return common.HexToAddress(contractAddresses[0])
 	}
 	return common.Address{}
