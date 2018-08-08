@@ -7,7 +7,7 @@ contract SharedAssets {
         address addr;               //资产发起人账户地址
         bytes32 userHash;           //用户hash
         uint timestamp;             //时间戳
-        uint interset;            //日利率
+        uint interset;              //日利率
         uint amount;                //额度
         uint state;                 //资产状态  0-不存在 1-开始投标 2-投标结束 3-选标结束 4-已放款 5-还款结束
         mapping(address => Bid) bids;
@@ -15,7 +15,7 @@ contract SharedAssets {
 
     struct Bid {
         uint timestamp;             //时间戳
-        uint interset;            //日利率
+        uint interset;              //日利率
         uint amount;                //额度
         uint deposit;               //保证金
         uint state;                 //资产状态  0-不存在 1-已投标 2-已中标 3-未中标 4-已放款 5-已没收保证金
@@ -111,7 +111,7 @@ contract SharedAssets {
         uint repayAmount = 0;
         for (uint i = 0; i < addrs[_id].length; i++) {
             if (assets[_id].bids[addrs[_id][i]].state == uint(4)) {
-                repayAmount = ((now - assets[_id].timestamp)/86400)*assets[_id].bids[addrs[_id][i]].amount*assets[_id].bids[addrs[_id][i]].interset;
+                repayAmount = ((now - assets[_id].timestamp)/86400)*assets[_id].bids[addrs[_id][i]].amount*(assets[_id].bids[addrs[_id][i]].interset/1000);
                 require(balance[msg.sender] >= repayAmount, "not enough balance");
                 balance[msg.sender] = balance[msg.sender] - repayAmount;
                 balance[addrs[_id][i]] = balance[addrs[_id][i]] + repayAmount;
@@ -123,5 +123,6 @@ contract SharedAssets {
 
     function withdraw() public returns(bool) {
         msg.sender.transfer(balance[msg.sender]);
+        return true;
     }
 }
