@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 
 contract CCC {
-    
+    //定义企业
     struct Company{
         string company;
         string email;
@@ -10,20 +10,21 @@ contract CCC {
         string enode;
         uint stat;
     }
+    //poa 选举票数
     struct Ballot {
         uint ticketNum;
         mapping(address => uint) voters;
     }
- //   
+   //挖矿投票票数   
     struct Mine_Ballot {
         uint ticketNum;
         mapping(address => uint) voters;
     }
- //   
+   // 挖矿投票记录  
     struct Mine_Ballot_Record {
         mapping (uint => uint)  record;
     }
-    
+    //poa 选举记录
     struct Ballot_Record {
         mapping (uint => uint)  record;
     }
@@ -42,12 +43,13 @@ contract CCC {
     mapping(address => uint) C_account_stat;
 
 
-
+    //投票后 允许挖矿打包的总票数
     uint Members_mine_sum_id;
-
+   //poa成员总票数
     uint Members_sum_id;
+    //企业id 自增
     uint Company_id;
-
+    //初始化合约
     function CCC (string _companyname,string _email,string _remark,string _enode) public{
         Company_id++;
         
@@ -62,7 +64,7 @@ contract CCC {
     }
     
     
-    
+    //poa投票合约
     function Vote(uint _fromcompanyid,uint _tocompanyid) public {
         require(_fromcompanyid != _tocompanyid, "from and to eq");
 
@@ -82,6 +84,7 @@ contract CCC {
         }
     }
 
+    //挖矿打包投票 前提必须已经说poa成员
     function VoteMine(uint _fromcompanyid,uint _tocompanyid) public {
         require(_fromcompanyid != _tocompanyid, "from and to eq");
         require(C_Members[C_company[_tocompanyid].owner] == uint(1) ,"_tocompanyid not POA");
@@ -104,7 +107,7 @@ contract CCC {
         }
     }
 
-
+    //增加公司
    function AddCompany (string _companyname,string _email,string _remark,string _enode,address _account) public{
         require(C_Members[msg.sender] == uint(1), "Not POA account");
 
@@ -118,7 +121,7 @@ contract CCC {
 
 
    }
-   
+   //更改
    function UpdateCompany (uint _companyid,string _email,string _remark,string _enode,uint _stat) public{
         require(C_company_stat[C_company[_companyid].company] == uint(1), "The company does not exist");
         require(C_company[_companyid].owner == msg.sender ,"Not the company account address");
@@ -127,37 +130,38 @@ contract CCC {
 
    }
    
+   //查询投票记录
    function ShowBallot(uint _companyid) view public returns (uint ticketNum){
         ticketNum=C_votes[C_company[_companyid].owner].ticketNum;
         
     }
-    
+    //查看挖矿投票数
     function ShowBallotMine(uint _companyid) view public returns (uint ticketNum){
         ticketNum=C_votes_mine[C_company[_companyid].owner].ticketNum;
         
     }
-
+    //查询企业是否为poa成员
     function isMember(uint _companyid ) view public returns (bool result){
         result = false;
         if(C_Members[C_company[_companyid].owner] ==1){
             result = true;
         }
     }
-    
+    //查询企业是否有挖矿打包权限
     function isMemberMine(uint _companyid ) view public returns (bool result){
         result = false;
         if(C_Member_mine[C_company[_companyid].owner] ==1){
             result = true;
         }
     }
-    
+    //查询账号是否是poa账号
     function isMemberOwner( address _account) view public returns (bool result){
         result = false;
         if(C_Members[_account] ==1){
             result = true;
         }
     }
-    
+    //查询企业的所以信息
     
     function ShowCompany(uint _companyid) view public returns(string R_companyname, string R_email,string R_remark,address R_owner,string R_enode,uint R_stat) {
         R_companyname=C_company[_companyid].company;
@@ -171,7 +175,7 @@ contract CCC {
 
          
     }
-
+    //查询多少企业
     function ShowSum() view public returns(uint sum) {
         sum=Company_id;
          
