@@ -1,0 +1,142 @@
+<div class="container" style="padding-top: 10px;">
+
+    <div class="boxi" style="clear:both;">Taireum 信息 <i class="fa fa-cube"></i> Block {{number}}</div>
+
+    <div id="block" class="blockdiv">
+        <div style="padding-bottom:30px;width:100%;text-align:right;clear:both">
+          <button class="btn btn-primary">{{conf}}</button>
+          <button class="btn btn-success cb"><span>{{gasUsed}} 使用Gas</span></button>
+          <a class="btn btn-primary btn-sm" ng-class="{disabled:firstBlock}" href="./#/block/{{blockNumber-1}}">&lt; 上一页</a>
+          <a class="btn btn-primary btn-sm" ng-class="{disabled: lastBlock}" href="./#/block/{{blockNumber+1}}">下一页 &gt;</a>
+        </div>
+        <h2 style="margin-top: 30px;">
+          <i class="fa fa-cube"></i> Summary
+          <small>- information of block {{number}}</small>
+        </h2>
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <td>区块高度</td>
+                <td><a href="./#/block/{{blockNumber}}">{{number}}</a></td>
+            </tr>
+            <tr>
+                <td>区块Hash</td>
+                <td>{{ hash }}</td>
+            </tr>
+            <tr>
+                <td>发送时间</td>
+                <td>
+                    {{timestamp}}
+                </td>
+            </tr>
+            <tr>
+              <td>确认</td>
+              <td><span style="color: #08d410; font-weight: bold;">{{conf}}</span></td>
+            </tr>
+            <tr>
+                <td>难度</td>
+                <td>
+                    {{difficulty}}
+                </td>
+            </tr>
+            <tr>
+                <td>随机数</td>
+                <td>{{nonce}}</td>
+            </tr>
+            <tr>
+                <td>大小</td>
+                <td>{{size}} bytes</td>
+            </tr>
+            <tr>
+                <td>矿工</td>
+                <td><a href="./#/address/{{miner}}">{{miner}}</a></td>
+            </tr>
+            <tr>
+                <td>Gas Limit</td>
+                <td>{{gasLimit}}</td>
+            </tr>
+            <tr>
+                <td>Gas Used</td>
+                <td>{{gasUsed}}</td>
+            </tr>
+            <tr>
+                <td>Uncle Hash</td>
+                <td>{{ uncledata }}</td>
+            </tr>
+            <tr>
+                <td>State Root Hash</td>
+                <td>{{ rootHash }}</td>
+            </tr>
+            <tr>
+                <td>Parent Hash</td>
+                <td>{{ parentHash }}</td>
+            </tr>
+            <tr>
+                <td>Data</td>
+                <td>{{extraData}}</td>
+            </tr>
+
+            <tr>
+                <td>Data (Translated)</td>
+                <td>{{dataFromHex}}</td>
+            </tr>
+
+            <tr>
+                <td>叔块数</td>
+                <td>{{numberOfUncles}}</td>
+            </tr>
+
+            <tr>
+                <td>交易数</td>
+                <td>{{numberOfTransactions}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <h2 style="margin-top: 30px;">
+      <i class="fa fa-exchange"></i> Transactions
+      <small>- contained in current block</small>
+    </h2>
+
+    <div ng-repeat="tx in transactions">
+      <table class="table table-striped">
+          <tbody>
+          <tr>
+              <th colspan="2" style="text-align:left">交易 #{{$index+1}}</th>
+          </tr>
+          <tr>
+              <td>Hash #</td>
+              <td><a href="./#/tx/{{tx.hash}}">{{tx.hash}}</a></td>
+          </tr>
+          <tr>
+              <td>发送者</td>
+              <td><a href="./#/address/{{tx.from}}">{{tx.from}}</a></td>
+          </tr>
+          <tr>
+              <td>接收者</td>
+              <td><a href="./#/address/{{tx.to}}">{{tx.to}}</a></td>
+          </tr>
+          <tr>
+             <td>合约地址</td>
+             <td><a href="./#/address/{{tx.contractAddress}}">{{tx.contractAddress}}</a></td>
+         </tr>
+          <tr>
+              <td>Gas</td>
+              <td>{{tx.gas}}</td>
+          </tr>
+          <tr>
+              <td>输入值</td>
+              <td><textarea style="min-width: 100%; background-color: #222; color: #08d410;">{{tx.input}}</textarea></td>
+          </tr>
+          <tr>
+              <td>数量</td>
+              <td>{{tx.value}} ETH</td>
+          </tr>
+          </tbody>
+      </table>
+      <hr>
+    </div>
+
+</div>
