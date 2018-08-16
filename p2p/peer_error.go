@@ -86,6 +86,7 @@ var discReasonToString = [...]string{
 	DiscUnexpectedIdentity:  "unexpected identity",
 	DiscSelf:                "connected to self",
 	DiscReadTimeout:         "read timeout",
+	DiscPermissionFailed:    "taireum permission failed",
 	DiscSubprotocolError:    "subprotocol error",
 }
 
