@@ -1,4 +1,3 @@
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -26,17 +25,12 @@ import (
 )
 
 const (
-	NODE_NAME_LENGTH    = 32
+	NODE_NAME_LENGTH = 32
 	PERMISSIONED_URL = "http://localhost:8421/api/enode"
 )
 
-
-
-
-
 // check if a given node is permissioned to connect to the change
 func isNodePermissioned(nodename string, currentNode string, datadir string, direction string) bool {
-
 	var permissionedList []string
 	nodes := parsePermissionedNodes()
 	for _, v := range nodes {
@@ -56,24 +50,18 @@ func isNodePermissioned(nodename string, currentNode string, datadir string, dir
 }
 
 func parsePermissionedNodes() []*discover.Node {
-
-
 	url := PERMISSIONED_URL
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Error("CCC Network is unavailable", "err", err)
 		return nil
-
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Error("CCC Failed to load nodes", "err", err)
 		return nil
-
-
 	}
-
 
 	nodelist := []string{}
 	if err := json.Unmarshal(body, &nodelist); err != nil {
@@ -89,7 +77,7 @@ func parsePermissionedNodes() []*discover.Node {
 		}
 		node, err := discover.ParseNode(url)
 		if err != nil {
-			log.Error("parsePermissionedNodes: Node URL",  "url", url, "err", err)
+			log.Error("parsePermissionedNodes: Node URL", "url", url, "err", err)
 			continue
 		}
 		//log.Error("json node:   "+node.String())

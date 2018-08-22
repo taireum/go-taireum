@@ -199,8 +199,8 @@ func (t *Tai) verifyHeader(chain consensus.ChainReader, header *types.Header, pa
 		return consensus.ErrFutureBlock
 	}
 
-	// Nonces must be 0xff..f
-	if !bytes.Equal(header.Nonce[:], nonceTai) {
+	// Nonces must be nonceTai or nonceCa
+	if !bytes.Equal(header.Nonce[:], nonceTai) && !bytes.Equal(header.Nonce[:], nonceCa){
 		return errNonce
 	}
 
@@ -300,14 +300,16 @@ func (t *Tai) verifySeal(chain consensus.ChainReader, header *types.Header, pare
 		return errUnauthorized
 	}
 
+	//TODO remove vifiry difficulty
 	// Ensure that the difficulty corresponds to the turn-ness of the signer
-	hostturn := t.authority.hostturn(header.Number.Uint64(), signer)
-	if hostturn && header.Difficulty.Cmp(diffHost) != 0 {
-		return errInvalidDifficulty
-	}
-	if !hostturn && header.Difficulty.Cmp(diffGuest) != 0 {
-		return errInvalidDifficulty
-	}
+//	hostturn := t.authority.hostturn(header.Number.Uint64(), signer)
+//	if hostturn && header.Difficulty.Cmp(diffHost) != 0 {
+//		return errInvalidDifficulty
+//	}
+//	if !hostturn && header.Difficulty.Cmp(diffGuest) != 0 {
+//		return errInvalidDifficulty
+//	}
+
 	return nil
 }
 
