@@ -52,9 +52,11 @@ Taireum的启动是一个比较复杂的过程。如果他是一个创始成员�
     geth --datadir datadir init genesis.json
 
 启动进程，启动都时候需要指定一系列相关参数
+
     geth --mine --nodiscover --datadir datadir--mine --unlock account --password ./passwd --etherbase account --rpc --rpcaddr 127.0.0.1 --rpcport 8545 --rpcapi "web3,eth" --rpccorsdomain "*" --networkid ID
 
-相关参数解析    
+相关参数解析 
+   
 | 参数    | 描述 |
 |:----------:|-------------|
 | **`--mine`** | 开启挖矿|
