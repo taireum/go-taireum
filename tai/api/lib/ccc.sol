@@ -10,21 +10,21 @@ contract CCC {
         string enode;
         uint stat;
     }
-    //poa 选举票数
+    //Member 选举票数
     struct Ballot {
         uint ticketNum;
         mapping(address => uint) voters;
     }
-   //挖矿投票票数   
+   //Poa投票票数   
     struct Mine_Ballot {
         uint ticketNum;
         mapping(address => uint) voters;
     }
-   // 挖矿投票记录  
+   // Poa投票记录  
     struct Mine_Ballot_Record {
         mapping (uint => uint)  record;
     }
-    //poa 选举记录
+    //Member 投票记录
     struct Ballot_Record {
         mapping (uint => uint)  record;
     }
@@ -43,9 +43,9 @@ contract CCC {
     mapping(address => uint) C_account_stat;
 
 
-    //投票后 允许挖矿打包的总票数
+    //投票后 poa的总票数
     uint Members_mine_sum_id;
-   //poa成员总票数
+   //Member成员总票数
     uint Members_sum_id;
     //企业id 自增
     uint Company_id;
@@ -64,7 +64,7 @@ contract CCC {
     }
     
     
-    //投票成为联盟成员
+    //投票成为联盟成员(Member)
     function VoteMember(uint _fromcompanyid,uint _tocompanyid) public {
         require(_fromcompanyid != _tocompanyid, "from and to eq");
 
@@ -140,7 +140,7 @@ contract CCC {
         ticketNum=C_votes_mine[C_company[_companyid].owner].ticketNum;
         
     }
-    //查询企业是否为成员
+    //查询企业是否为poa成员
     function isMember(uint _companyid ) view public returns (bool result){
         result = false;
         if(C_Members[C_company[_companyid].owner] ==1){
@@ -154,7 +154,7 @@ contract CCC {
             result = true;
         }
     }
-    //查询账号是否是联盟成员账号
+    //查询账号是否是poa账号
     function isMemberOwner( address _account) view public returns (bool result){
         result = false;
         if(C_Members[_account] ==1){
