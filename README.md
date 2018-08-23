@@ -96,19 +96,40 @@ Taireum整个联盟链内只允许有一个创始者，无数个成员。新成�
 
 ## **新成员接入**
 
-新成员加入必须满足一下几个条件：
+新成员加入必须满足以下几个条件：
 - 1.已经下载好Taireum项目，并且编译完毕。
 - 2.获得Taireum初始化配置文件。
 - 3.对Taireum初始化完成，并且配置好了相关账号和enode节点
-- 4.将上述相关信息发送给创始成员者
+- 4.将上述相关信息发送给创始者
 
 
 创始者：
 - 1.添加新成员信息，必须包含三要素{公司名称/enode节点信息/账号Address}
 - 2.第一次投票允许接入P2P网络（必选）
-- 3，第二次投票决定打包权（待选）
+- 3.第二次投票决定打包权（待选）
 
 当新成员投票之后，创始者将 enode url 发送给新成员 ，当新成员节点 p2p 通信模块读取智能合约成员列表 信息，同意建立连接，新成员节点开始下载区块数据。
+
+加入命令参考
+
+    geth --bootnodes --datadir data --unlock  "0xa4738949c7cc6882febd97a26eafcd6eaa2593c5" --password ./passwd --rpc  --rpcport 8545 --rpcapi="api,miner,db,eth,net,web3,personal,admin"  --networkid 99  --bootnodes enode://edd1b2212cc243a5b0f8c952db32a33670cf50f42225acb2f9aa9581a6f5bbb91cf1a8d5844f426399e5ec6736749f1c766c451d47dbc04d78f73bcdcc14a673@10.200.145.7:30303 --mine console
+
+| 参数    | 描述 |
+|:----------:|-------------|
+| `--bootnodes` | 加入创始者p2p网络 |
+| `--nodiscover` | 关闭自动发现，避免在公网上或者其他enode节点加入 |
+
+常见指令参考
+
+| 指令    | 描述 |
+|:----------:|-------------|
+| `admin.nodeInfo` | 查看自己节点信息 |
+| `admin.addPeer(""）` | 添加节点 |
+| `admin.peers` | 查看新添加的节点 |
+| `net.peerCount` | 查看连接数 |
+
+
+
 
 
 
