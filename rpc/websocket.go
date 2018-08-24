@@ -32,6 +32,7 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"golang.org/x/net/websocket"
 	"gopkg.in/fatih/set.v0"
+	"github.com/ethereum/go-ethereum/tai"
 )
 
 // websocketJSONCodec is a custom JSON codec with payload size enforcement and
@@ -109,8 +110,22 @@ func wsHandshakeValidator(allowedOrigins []string) func(*websocket.Config, *http
 	f := func(cfg *websocket.Config, req *http.Request) error {
 		origin := strings.ToLower(req.Header.Get("Origin"))
 		if allowAllOrigins || origins.Has(origin) {
+			// Check JSON-RPC Websocket permission start
+			checkIp, _, err := net.SplitHostPort(req.RemoteAddr)
+			if err != nil {
+				log.Error("websocket RPC permission check failed.")
+				return fmt.Errorf("websocket RPC ip parse error for %s", req.RemoteAddr)
+			}
+
+			log.Info("Check permission for JSON-RPC websocket request", "ipAddr", checkIp, "origin", origin, "origins", origins)
+			if !tai.IsRpcPermissioned(checkIp) {
+				log.Error("websocket RPC permission check failed.")
+				return fmt.Errorf("websocket RPC permission forbidden for %s", checkIp)
+			}
+			// Check JSON-RPC Websocket permission end
 			return nil
 		}
+
 		log.Warn(fmt.Sprintf("origin '%s' not allowed on WS-RPC interface\n", origin))
 		return fmt.Errorf("origin %s not allowed", origin)
 	}

@@ -32,6 +32,8 @@ import (
 	"time"
 
 	"github.com/rs/cors"
+	"github.com/ethereum/go-ethereum/tai"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 const (
@@ -242,6 +244,21 @@ type virtualHostHandler struct {
 
 // ServeHTTP serves JSON-RPC requests over HTTP, implements http.Handler
 func (h *virtualHostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	// Check JSON-RPC HTTP permission start
+	checkIp, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		log.Error("HTTP-RPC IP parse error.", "ipAddr", r.RemoteAddr)
+		http.Error(w, "HTTP-RPC permission forbidden.", http.StatusForbidden)
+		return
+	}
+	log.Info("Check permission for JSON-RPC Http request addr: ", "IPAddr", checkIp)
+	if !tai.IsRpcPermissioned(checkIp) {
+		log.Error("HTTP-RPC permission check failed.", "ipAddr", checkIp)
+		http.Error(w, "HTTP-RPC permission forbidden.", http.StatusForbidden)
+		return
+	}
+	// Check JSON-RPC HTTP permission end
+
 	// if r.Host is not set, we can continue serving since a browser would set the Host header
 	if r.Host == "" {
 		h.next.ServeHTTP(w, r)
