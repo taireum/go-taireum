@@ -64,8 +64,8 @@ contract CCC {
     }
     
     
-    //poa投票合约
-    function Vote(uint _fromcompanyid,uint _tocompanyid) public {
+    //投票成为联盟成员
+    function VoteMember(uint _fromcompanyid,uint _tocompanyid) public {
         require(_fromcompanyid != _tocompanyid, "from and to eq");
 
         require(C_company_stat[C_company[_fromcompanyid].company] == uint(1), "The Vote of from company does not exist");
@@ -84,7 +84,7 @@ contract CCC {
         }
     }
 
-    //挖矿打包投票 前提必须已经说poa成员
+    // 投票授权打包区块投票，前提必须已经联盟成员
     function VoteMine(uint _fromcompanyid,uint _tocompanyid) public {
         require(_fromcompanyid != _tocompanyid, "from and to eq");
         require(C_Members[C_company[_tocompanyid].owner] == uint(1) ,"_tocompanyid not POA");
@@ -107,8 +107,8 @@ contract CCC {
         }
     }
 
-    //增加公司
-   function AddCompany (string _companyname,string _email,string _remark,string _enode,address _account) public{
+    //联盟新成员申请
+   function applyMember (string _companyname,string _email,string _remark,string _enode,address _account) public{
         require(C_Members[msg.sender] == uint(1), "Not POA account");
 
         require(C_company_stat[_companyname] != uint(1), "The company has already existed");
@@ -140,7 +140,7 @@ contract CCC {
         ticketNum=C_votes_mine[C_company[_companyid].owner].ticketNum;
         
     }
-    //查询企业是否为poa成员
+    //查询企业是否为成员
     function isMember(uint _companyid ) view public returns (bool result){
         result = false;
         if(C_Members[C_company[_companyid].owner] ==1){
@@ -154,14 +154,14 @@ contract CCC {
             result = true;
         }
     }
-    //查询账号是否是poa账号
+    //查询账号是否是联盟成员账号
     function isMemberOwner( address _account) view public returns (bool result){
         result = false;
         if(C_Members[_account] ==1){
             result = true;
         }
     }
-    //查询企业的所以信息
+    //查询企业的所有信息
     
     function ShowCompany(uint _companyid) view public returns(string R_companyname, string R_email,string R_remark,address R_owner,string R_enode,uint R_stat) {
         R_companyname=C_company[_companyid].company;
