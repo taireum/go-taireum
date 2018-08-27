@@ -131,24 +131,6 @@ CCC控制台编译启动
     sh init_account.sh /tmp/new admin  8545 10086  99
 
 
-json部署
-
-    http://127.0.0.1:8421/api/v1
-
-        {
-        "source": "ccc",
-        "method": "setup",
-        "argv": {
-        "_company":"小泰科技",
-        "_remark":"测试",
-        "_email":"979857108@qq.com",
-        "_chainid":10086,
-        "_datadir":"/tmp/new",
-        "_rpcport":8545,
-        "_networkid":99,
-        "_eth_url":"http://localhost:8545"
-            }
-        }
 
 
 
