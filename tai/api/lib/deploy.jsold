@@ -35,22 +35,6 @@ let gas=4000000;
 let gasPrice=200000000; //数值越大，消耗的eth越大
 
 
-command="cd lib;nohup sh init_account.sh "+datadir+" admin "+rpcport+" "+chainid+" "+networkid+" >geth.log 2>&1";
-console.log(command)
-exec(command, function(err,stdout,stderr){
-        if(err) {
-            console.log(stderr);
-        } else {
-            
-            console.log(stdout);
-        }
-		});
-
-var waitUntil = new Date(new Date().getTime() + 10 * 1000);
-while(waitUntil > new Date()){}
-
-
-
 
 if(typeof web3 != 'undefined'){
 	web3=new Web3(web3.currentProvider);
@@ -72,7 +56,7 @@ var temp='0x'+bytecode;
 
 
 
-config_json={"eth_url":"http://localhost:8545","gas":500000,"gasPrice":2000000000,"abi":abi}
+config_json={"eth_url":"http://10.200.22.222:7545","gas":500000,"gasPrice":2000000000,"abi":abi}
 str=JSON.stringify(config_json)
 fs.writeFile('lib/config.json',str,function(err){
 	if(err){
@@ -84,6 +68,8 @@ fs.writeFile('lib/config.json',str,function(err){
 //console.log("当前合约二进制:"+JSON.stringify(temp))
 
 web3.eth.getAccounts().then(data=>{
+	web3.eth.personal.unlockAccount(data[0]).then(openAccountState=>{
+		if(openAccountState){ 	
 			//var gasEstimate = web3.eth.estimateGas({to:web3.eth.accounts[0],data:temp}); //估算gas
             //console.log(gasEstimate)
 			var rsContract=new web3.eth.Contract(abi).deploy({
@@ -106,20 +92,21 @@ web3.eth.getAccounts().then(data=>{
 				//var contractsaddress=newContractAddress
 				console.log("新合约地址:"+newContractAddress);
 
-				
-					
-					str={"contractaddress":newContractAddress};
-					str1=JSON.stringify(str)
-
-					//var str = JSON.stringify(person);
-					console.log("正在写入合约地址 lib/contractaddress.json "+str1)
-					fs.writeFile('lib/contractaddress.json',str1,function(err){
+				fs.readFile('lib/config.json',function(err,data){
+					if(err){
+						return console.error(err.stack);
+					}
+					var person = data.toString();//将二进制的数据转换为字符串
+					person = JSON.parse(person);//将字符串转换为json对象
+					person.contractaddress=newContractAddress;
+					var str = JSON.stringify(person);//因为nodejs的写入文件只认识字符串或者二进制数，所以把json对象转换成字符串重新写入json文件中
+					fs.writeFile('lib/config.json',str,function(err){
 						if(err){
 							console.error(err.stack);
 						}
 						console.log('----------新增成功-------------');
 					})
-				
+				})
 			
 				console.log(config_json)
 				web3.eth.getBlockNumber().then(blockNum=>{
@@ -135,7 +122,8 @@ web3.eth.getAccounts().then(data=>{
  
 			});
 			
-	});
+	}});
+})
 
      
 		

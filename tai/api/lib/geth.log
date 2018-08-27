@@ -1,0 +1,246 @@
+INFO [08-27|11:07:05] Maximum peer count                       ETH=25 LES=0 total=25
+Your new account is locked with a password. Please give a password. Do not forget this password.
+!! Unsupported terminal, password will be echoed.
+Passphrase: 
+Repeat passphrase: 
+Address: {15cb8144c22da883c2a2c120ed1b21f3cdc0ee35}
+sed: 1: "genesis.json": extra characters at the end of g command
+INFO [08-27|11:07:14] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [08-27|11:07:15] Allocated cache and file handles         database=/tmp/new/geth/chaindata cache=16 handles=16
+INFO [08-27|11:07:15] Writing custom genesis block 
+INFO [08-27|11:07:15] Persisted trie from memory database      nodes=355 size=51.91kB time=3.327298ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [08-27|11:07:15] Successfully wrote genesis state         database=chaindata               hash=cb1539…14ca8d
+INFO [08-27|11:07:15] Allocated cache and file handles         database=/tmp/new/geth/lightchaindata cache=16 handles=16
+INFO [08-27|11:07:15] Writing custom genesis block 
+INFO [08-27|11:07:15] Persisted trie from memory database      nodes=355 size=51.91kB time=1.385727ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [08-27|11:07:15] Successfully wrote genesis state         database=lightchaindata               hash=cb1539…14ca8d
+启动进程
+INFO [08-27|11:07:17] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [08-27|11:07:17] Starting peer-to-peer node               instance=Geth/v1.8.12-unstable-e58bc39f/darwin-amd64/go1.10.3
+INFO [08-27|11:07:17] Allocated cache and file handles         database=/tmp/new/geth/chaindata cache=768 handles=1024
+INFO [08-27|11:07:17] Initialised chain configuration          config="{ChainID: 30488 Homestead: 1 DAO: <nil> DAOSupport: false EIP150: 2 EIP155: 3 EIP158: 3 Byzantium: 4 Constantinople: <nil> Engine: tai}"
+INFO [08-27|11:07:17] Initialising Ethereum protocol           versions="[63 62]" network=99
+INFO [08-27|11:07:17] Loaded most recent local header          number=0 hash=cb1539…14ca8d td=1
+INFO [08-27|11:07:17] Loaded most recent local full block      number=0 hash=cb1539…14ca8d td=1
+INFO [08-27|11:07:17] Loaded most recent local fast block      number=0 hash=cb1539…14ca8d td=1
+INFO [08-27|11:07:17] Regenerated local transaction journal    transactions=0 accounts=0
+ERROR[08-27|11:07:17] aaaaaaa 
+ERROR[08-27|11:07:17] 时间 
+ERROR[08-27|11:07:17] 复制ca 
+INFO [08-27|11:07:17] Starting P2P networking 
+INFO [08-27|11:07:17] RLPx listener up                         self="enode://a5803109c986f09da70195cf4c2e867fc15a5200b6e2466dc6ff6613644dae08ab712532b65a1e7f57e994ada039090e5cc1004265b23f496222215fe56b7c06@[::]:30303?discport=0"
+INFO [08-27|11:07:17] IPC endpoint opened                      url=/tmp/new/geth.ipc
+INFO [08-27|11:07:17] HTTP endpoint opened                     url=http://127.0.0.1:8545 cors= vhosts=localhost
+INFO [08-27|11:07:18] Unlocked account                         address=0x15cB8144c22DA883c2a2c120ED1B21F3CDc0Ee35
+INFO [08-27|11:07:18] Transaction pool price threshold updated price=18000000000
+INFO [08-27|11:07:18] Starting mining operation 
+ERROR[08-27|11:07:18] aaaaaaa 
+ERROR[08-27|11:07:18] 时间 
+ERROR[08-27|11:07:18] 复制ca 
+INFO [08-27|11:07:18] Commit new mining work                   number=1 txs=0 uncles=0 elapsed=3.488ms
+INFO [08-27|11:07:18] Successfully sealed new block            number=1 hash=aff672…3afa0f
+INFO [08-27|11:07:18] 🔨 mined potential block                  number=1 hash=aff672…3afa0f
+ERROR[08-27|11:07:18] aaaaaaa 
+ERROR[08-27|11:07:18] 头coinbase 
+INFO [08-27|11:07:18] Commit new mining work                   number=2 txs=0 uncles=0 elapsed=1.781ms
+INFO [08-27|11:07:22] Submitted contract creation              fullhash=0xe21979d4e0eed84ab9dab73cff9499200b932accc0ff20738259afc29c17b5ff contract=0xb69F2A4B8f59f24AEa9A6fFa12bB29281F11F68a
+INFO [08-27|11:07:33] Successfully sealed new block            number=2 hash=53e664…5ac814
+INFO [08-27|11:07:33] 🔨 mined potential block                  number=2 hash=53e664…5ac814
+ERROR[08-27|11:07:33] aaaaaaa 
+ERROR[08-27|11:07:33] 头coinbase 
+INFO [08-27|11:07:33] Commit new mining work                   number=3 txs=1 uncles=0 elapsed=23.141ms
+INFO [08-27|11:07:48] Successfully sealed new block            number=3 hash=d34762…d54084
+INFO [08-27|11:07:48] 🔨 mined potential block                  number=3 hash=d34762…d54084
+ERROR[08-27|11:07:48] aaaaaaa 
+ERROR[08-27|11:07:48] 头coinbase 
+INFO [08-27|11:07:48] Commit new mining work                   number=4 txs=0 uncles=0 elapsed=5.139ms
+INFO [08-27|11:08:03] Successfully sealed new block            number=4 hash=a46bd9…0f1179
+INFO [08-27|11:08:03] 🔨 mined potential block                  number=4 hash=a46bd9…0f1179
+ERROR[08-27|11:08:03] aaaaaaa 
+ERROR[08-27|11:08:03] 头coinbase 
+INFO [08-27|11:08:03] Commit new mining work                   number=5 txs=0 uncles=0 elapsed=21.269ms
+INFO [08-27|11:08:18] Successfully sealed new block            number=5 hash=cb9249…709b53
+INFO [08-27|11:08:18] 🔨 mined potential block                  number=5 hash=cb9249…709b53
+ERROR[08-27|11:08:18] aaaaaaa 
+ERROR[08-27|11:08:18] 头coinbase 
+INFO [08-27|11:08:18] Commit new mining work                   number=6 txs=0 uncles=0 elapsed=6.797ms
+INFO [08-27|11:08:33] Successfully sealed new block            number=6 hash=84d99f…85598a
+INFO [08-27|11:08:33] 🔗 block reached canonical chain          number=1 hash=aff672…3afa0f
+INFO [08-27|11:08:33] 🔨 mined potential block                  number=6 hash=84d99f…85598a
+ERROR[08-27|11:08:33] aaaaaaa 
+ERROR[08-27|11:08:33] 头coinbase 
+INFO [08-27|11:08:33] Commit new mining work                   number=7 txs=0 uncles=0 elapsed=4.128ms
+INFO [08-27|11:08:48] Successfully sealed new block            number=7 hash=d9eeba…b843d1
+INFO [08-27|11:08:48] 🔗 block reached canonical chain          number=2 hash=53e664…5ac814
+ERROR[08-27|11:08:48] aaaaaaa 
+INFO [08-27|11:08:48] 🔨 mined potential block                  number=7 hash=d9eeba…b843d1
+ERROR[08-27|11:08:48] 头coinbase 
+INFO [08-27|11:08:48] Commit new mining work                   number=8 txs=0 uncles=0 elapsed=10.002ms
+INFO [08-27|11:09:03] Successfully sealed new block            number=8 hash=9b3778…6b08b4
+ERROR[08-27|11:09:03] aaaaaaa 
+INFO [08-27|11:09:03] 🔗 block reached canonical chain          number=3 hash=d34762…d54084
+INFO [08-27|11:09:03] 🔨 mined potential block                  number=8 hash=9b3778…6b08b4
+ERROR[08-27|11:09:03] 头coinbase 
+INFO [08-27|11:09:03] Commit new mining work                   number=9 txs=0 uncles=0 elapsed=4.979ms
+INFO [08-27|11:09:18] Successfully sealed new block            number=9 hash=8aae64…2970f4
+INFO [08-27|11:09:18] 🔗 block reached canonical chain          number=4 hash=a46bd9…0f1179
+INFO [08-27|11:09:18] 🔨 mined potential block                  number=9 hash=8aae64…2970f4
+ERROR[08-27|11:09:18] aaaaaaa 
+ERROR[08-27|11:09:18] 头coinbase 
+INFO [08-27|11:09:18] Commit new mining work                   number=10 txs=0 uncles=0 elapsed=5.148ms
+INFO [08-27|11:09:33] Successfully sealed new block            number=10 hash=bff18b…bcf4b4
+INFO [08-27|11:09:33] 🔗 block reached canonical chain          number=5  hash=cb9249…709b53
+INFO [08-27|11:09:33] 🔨 mined potential block                  number=10 hash=bff18b…bcf4b4
+ERROR[08-27|11:09:33] aaaaaaa 
+ERROR[08-27|11:09:33] 头coinbase 
+INFO [08-27|11:09:33] Commit new mining work                   number=11 txs=0 uncles=0 elapsed=4.799ms
+INFO [08-27|11:09:48] Successfully sealed new block            number=11 hash=4450f1…ee0c61
+INFO [08-27|11:09:48] 🔗 block reached canonical chain          number=6  hash=84d99f…85598a
+INFO [08-27|11:09:48] 🔨 mined potential block                  number=11 hash=4450f1…ee0c61
+ERROR[08-27|11:09:48] aaaaaaa 
+ERROR[08-27|11:09:48] 头coinbase 
+INFO [08-27|11:09:48] Commit new mining work                   number=12 txs=0 uncles=0 elapsed=4.705ms
+INFO [08-27|11:10:03] Successfully sealed new block            number=12 hash=815dcc…fb751b
+INFO [08-27|11:10:03] 🔗 block reached canonical chain          number=7  hash=d9eeba…b843d1
+INFO [08-27|11:10:03] 🔨 mined potential block                  number=12 hash=815dcc…fb751b
+ERROR[08-27|11:10:03] aaaaaaa 
+ERROR[08-27|11:10:03] 头coinbase 
+INFO [08-27|11:10:03] Commit new mining work                   number=13 txs=0 uncles=0 elapsed=5.158ms
+INFO [08-27|11:10:18] Successfully sealed new block            number=13 hash=87a0fd…a0f1f9
+INFO [08-27|11:10:18] 🔗 block reached canonical chain          number=8  hash=9b3778…6b08b4
+ERROR[08-27|11:10:18] aaaaaaa 
+INFO [08-27|11:10:18] 🔨 mined potential block                  number=13 hash=87a0fd…a0f1f9
+ERROR[08-27|11:10:18] 头coinbase 
+INFO [08-27|11:10:18] Commit new mining work                   number=14 txs=0 uncles=0 elapsed=3.679ms
+INFO [08-27|11:10:33] Successfully sealed new block            number=14 hash=66c0f6…480e84
+INFO [08-27|11:10:33] 🔗 block reached canonical chain          number=9  hash=8aae64…2970f4
+ERROR[08-27|11:10:33] aaaaaaa 
+INFO [08-27|11:10:33] 🔨 mined potential block                  number=14 hash=66c0f6…480e84
+ERROR[08-27|11:10:33] 头coinbase 
+INFO [08-27|11:10:33] Commit new mining work                   number=15 txs=0 uncles=0 elapsed=4.213ms
+INFO [08-27|11:10:48] Successfully sealed new block            number=15 hash=0dd94b…8c248f
+INFO [08-27|11:10:48] 🔗 block reached canonical chain          number=10 hash=bff18b…bcf4b4
+INFO [08-27|11:10:48] 🔨 mined potential block                  number=15 hash=0dd94b…8c248f
+ERROR[08-27|11:10:48] aaaaaaa 
+ERROR[08-27|11:10:48] 头coinbase 
+INFO [08-27|11:10:48] Commit new mining work                   number=16 txs=0 uncles=0 elapsed=5.141ms
+INFO [08-27|11:11:03] Successfully sealed new block            number=16 hash=d01c5d…ae59c1
+INFO [08-27|11:11:03] 🔗 block reached canonical chain          number=11 hash=4450f1…ee0c61
+INFO [08-27|11:11:03] 🔨 mined potential block                  number=16 hash=d01c5d…ae59c1
+ERROR[08-27|11:11:03] aaaaaaa 
+ERROR[08-27|11:11:03] 头coinbase 
+INFO [08-27|11:11:03] Commit new mining work                   number=17 txs=0 uncles=0 elapsed=4.160ms
+INFO [08-27|11:11:18] Successfully sealed new block            number=17 hash=150c46…8c34c5
+INFO [08-27|11:11:18] 🔗 block reached canonical chain          number=12 hash=815dcc…fb751b
+ERROR[08-27|11:11:18] aaaaaaa 
+INFO [08-27|11:11:18] 🔨 mined potential block                  number=17 hash=150c46…8c34c5
+ERROR[08-27|11:11:18] 头coinbase 
+INFO [08-27|11:11:18] Commit new mining work                   number=18 txs=0 uncles=0 elapsed=4.269ms
+INFO [08-27|11:11:33] Successfully sealed new block            number=18 hash=5d14aa…e7b0c2
+INFO [08-27|11:11:33] 🔗 block reached canonical chain          number=13 hash=87a0fd…a0f1f9
+INFO [08-27|11:11:33] 🔨 mined potential block                  number=18 hash=5d14aa…e7b0c2
+ERROR[08-27|11:11:33] aaaaaaa 
+ERROR[08-27|11:11:33] 头coinbase 
+INFO [08-27|11:11:33] Commit new mining work                   number=19 txs=0 uncles=0 elapsed=3.690ms
+INFO [08-27|11:11:48] Successfully sealed new block            number=19 hash=14f317…870621
+INFO [08-27|11:11:48] 🔗 block reached canonical chain          number=14 hash=66c0f6…480e84
+ERROR[08-27|11:11:48] aaaaaaa 
+ERROR[08-27|11:11:48] 头coinbase 
+INFO [08-27|11:11:48] 🔨 mined potential block                  number=19 hash=14f317…870621
+INFO [08-27|11:11:48] Commit new mining work                   number=20 txs=0 uncles=0 elapsed=3.501ms
+INFO [08-27|11:12:03] Successfully sealed new block            number=20 hash=e403ce…a86d3e
+INFO [08-27|11:12:03] 🔗 block reached canonical chain          number=15 hash=0dd94b…8c248f
+INFO [08-27|11:12:03] 🔨 mined potential block                  number=20 hash=e403ce…a86d3e
+ERROR[08-27|11:12:03] aaaaaaa 
+ERROR[08-27|11:12:03] 头coinbase 
+INFO [08-27|11:12:03] Commit new mining work                   number=21 txs=0 uncles=0 elapsed=5.077ms
+INFO [08-27|11:12:18] Successfully sealed new block            number=21 hash=d96930…28d31e
+INFO [08-27|11:12:18] 🔗 block reached canonical chain          number=16 hash=d01c5d…ae59c1
+ERROR[08-27|11:12:18] aaaaaaa 
+ERROR[08-27|11:12:18] 头coinbase 
+INFO [08-27|11:12:18] 🔨 mined potential block                  number=21 hash=d96930…28d31e
+INFO [08-27|11:12:18] Commit new mining work                   number=22 txs=0 uncles=0 elapsed=4.539ms
+INFO [08-27|11:12:33] Successfully sealed new block            number=22 hash=b0d0c9…e92063
+INFO [08-27|11:12:33] 🔗 block reached canonical chain          number=17 hash=150c46…8c34c5
+INFO [08-27|11:12:33] 🔨 mined potential block                  number=22 hash=b0d0c9…e92063
+ERROR[08-27|11:12:33] aaaaaaa 
+ERROR[08-27|11:12:33] 头coinbase 
+INFO [08-27|11:12:33] Commit new mining work                   number=23 txs=0 uncles=0 elapsed=4.702ms
+INFO [08-27|11:12:48] Successfully sealed new block            number=23 hash=048b3b…1b998e
+INFO [08-27|11:12:48] 🔗 block reached canonical chain          number=18 hash=5d14aa…e7b0c2
+INFO [08-27|11:12:48] 🔨 mined potential block                  number=23 hash=048b3b…1b998e
+ERROR[08-27|11:12:48] aaaaaaa 
+ERROR[08-27|11:12:48] 头coinbase 
+INFO [08-27|11:12:48] Commit new mining work                   number=24 txs=0 uncles=0 elapsed=3.946ms
+INFO [08-27|11:13:03] Successfully sealed new block            number=24 hash=ace49b…edba72
+INFO [08-27|11:13:03] 🔗 block reached canonical chain          number=19 hash=14f317…870621
+INFO [08-27|11:13:03] 🔨 mined potential block                  number=24 hash=ace49b…edba72
+ERROR[08-27|11:13:03] aaaaaaa 
+ERROR[08-27|11:13:03] 头coinbase 
+INFO [08-27|11:13:03] Commit new mining work                   number=25 txs=0 uncles=0 elapsed=4.013ms
+INFO [08-27|11:13:18] Successfully sealed new block            number=25 hash=13dfed…f73b7e
+INFO [08-27|11:13:18] 🔗 block reached canonical chain          number=20 hash=e403ce…a86d3e
+ERROR[08-27|11:13:18] aaaaaaa 
+ERROR[08-27|11:13:18] 头coinbase 
+INFO [08-27|11:13:18] 🔨 mined potential block                  number=25 hash=13dfed…f73b7e
+INFO [08-27|11:13:18] Commit new mining work                   number=26 txs=0 uncles=0 elapsed=3.631ms
+INFO [08-27|11:13:33] Successfully sealed new block            number=26 hash=14f3fe…23ee9e
+INFO [08-27|11:13:33] 🔗 block reached canonical chain          number=21 hash=d96930…28d31e
+INFO [08-27|11:13:33] 🔨 mined potential block                  number=26 hash=14f3fe…23ee9e
+ERROR[08-27|11:13:33] aaaaaaa 
+ERROR[08-27|11:13:33] 头coinbase 
+INFO [08-27|11:13:33] Commit new mining work                   number=27 txs=0 uncles=0 elapsed=4.033ms
+INFO [08-27|11:13:48] Successfully sealed new block            number=27 hash=8c1d8b…999bc4
+INFO [08-27|11:13:48] 🔗 block reached canonical chain          number=22 hash=b0d0c9…e92063
+INFO [08-27|11:13:48] 🔨 mined potential block                  number=27 hash=8c1d8b…999bc4
+ERROR[08-27|11:13:48] aaaaaaa 
+ERROR[08-27|11:13:48] 头coinbase 
+INFO [08-27|11:13:48] Commit new mining work                   number=28 txs=0 uncles=0 elapsed=4.494ms
+INFO [08-27|11:14:03] Successfully sealed new block            number=28 hash=94259d…5404f0
+INFO [08-27|11:14:03] 🔗 block reached canonical chain          number=23 hash=048b3b…1b998e
+INFO [08-27|11:14:03] 🔨 mined potential block                  number=28 hash=94259d…5404f0
+ERROR[08-27|11:14:03] aaaaaaa 
+ERROR[08-27|11:14:03] 头coinbase 
+INFO [08-27|11:14:03] Commit new mining work                   number=29 txs=0 uncles=0 elapsed=7.156ms
+INFO [08-27|11:14:18] Successfully sealed new block            number=29 hash=c1e7ee…c93922
+INFO [08-27|11:14:18] 🔗 block reached canonical chain          number=24 hash=ace49b…edba72
+INFO [08-27|11:14:18] 🔨 mined potential block                  number=29 hash=c1e7ee…c93922
+ERROR[08-27|11:14:18] aaaaaaa 
+ERROR[08-27|11:14:18] 头coinbase 
+INFO [08-27|11:14:18] Commit new mining work                   number=30 txs=0 uncles=0 elapsed=4.183ms
+INFO [08-27|11:14:33] Successfully sealed new block            number=30 hash=6606ad…2683c7
+INFO [08-27|11:14:33] 🔗 block reached canonical chain          number=25 hash=13dfed…f73b7e
+INFO [08-27|11:14:33] 🔨 mined potential block                  number=30 hash=6606ad…2683c7
+ERROR[08-27|11:14:33] aaaaaaa 
+ERROR[08-27|11:14:33] 头coinbase 
+INFO [08-27|11:14:33] Commit new mining work                   number=31 txs=0 uncles=0 elapsed=4.512ms
+INFO [08-27|11:14:48] Successfully sealed new block            number=31 hash=2dc0b0…a06326
+INFO [08-27|11:14:48] 🔗 block reached canonical chain          number=26 hash=14f3fe…23ee9e
+INFO [08-27|11:14:48] 🔨 mined potential block                  number=31 hash=2dc0b0…a06326
+ERROR[08-27|11:14:48] aaaaaaa 
+ERROR[08-27|11:14:48] 头coinbase 
+INFO [08-27|11:14:48] Commit new mining work                   number=32 txs=0 uncles=0 elapsed=4.111ms
+INFO [08-27|11:15:03] Successfully sealed new block            number=32 hash=066d81…e0560b
+INFO [08-27|11:15:03] 🔗 block reached canonical chain          number=27 hash=8c1d8b…999bc4
+INFO [08-27|11:15:03] 🔨 mined potential block                  number=32 hash=066d81…e0560b
+ERROR[08-27|11:15:03] aaaaaaa 
+ERROR[08-27|11:15:03] 头coinbase 
+INFO [08-27|11:15:03] Commit new mining work                   number=33 txs=0 uncles=0 elapsed=3.959ms
+INFO [08-27|11:15:18] Successfully sealed new block            number=33 hash=77d11b…8bb10b
+INFO [08-27|11:15:18] 🔗 block reached canonical chain          number=28 hash=94259d…5404f0
+INFO [08-27|11:15:18] 🔨 mined potential block                  number=33 hash=77d11b…8bb10b
+ERROR[08-27|11:15:18] aaaaaaa 
+ERROR[08-27|11:15:18] 头coinbase 
+INFO [08-27|11:15:18] Commit new mining work                   number=34 txs=0 uncles=0 elapsed=4.627ms
+INFO [08-27|11:15:33] Successfully sealed new block            number=34 hash=97a934…7cdea4
+INFO [08-27|11:15:33] 🔗 block reached canonical chain          number=29 hash=c1e7ee…c93922
+ERROR[08-27|11:15:33] aaaaaaa 
+INFO [08-27|11:15:33] 🔨 mined potential block                  number=34 hash=97a934…7cdea4
+ERROR[08-27|11:15:33] 头coinbase 
+INFO [08-27|11:15:33] Commit new mining work                   number=35 txs=0 uncles=0 elapsed=6.799ms
+INFO [08-27|11:15:48] Successfully sealed new block            number=35 hash=14badb…b7c5cc
+INFO [08-27|11:15:48] 🔗 block reached canonical chain          number=30 hash=6606ad…2683c7
+INFO [08-27|11:15:48] 🔨 mined potential block                  number=35 hash=14badb…b7c5cc
+ERROR[08-27|11:15:48] aaaaaaa 
+ERROR[08-27|11:15:48] 头coinbase 
+INFO [08-27|11:15:48] Commit new mining work                   number=36 txs=0 uncles=0 elapsed=4.816ms

@@ -1,2 +1,1 @@
-*/1 * * * *  /opt/ccc_rest/run
-
+*/1 * * * * /opt/ccc_rest/lib/run /opt/ccc_rest

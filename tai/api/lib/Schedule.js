@@ -28,10 +28,11 @@ if (typeof web3 !== 'undefined') {
 } else {
     web3 = new Web3(config.eth_url);
 }
- 
-rule.second =1;; 
+
+var times1    = [1,6,11,16,21,26,31,36,41,46,51,56];
+rule.second  = times1;
 var j = schedule.scheduleJob(rule, function(){
-    exec("node lib/company_json.js ; node lib/member_json.js", function(err,stdout,stderr){
+    exec("node lib/company_json.js ; node lib/member_json.js;node lib/mine_json.js", function(err,stdout,stderr){
         if(err) {
             console.log(stderr);
         } else {
