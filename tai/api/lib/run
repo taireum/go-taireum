@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ ! -e /tmp/clock ];then
+cd $1
+touch /tmp/clock
+echo "touch clock">>/opt/run.st
+source ~/.bash_profile
+node lib/deploy.js
+fi

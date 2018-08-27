@@ -27,20 +27,16 @@ if (typeof web3 !== 'undefined') {
 (async()=>{  
     var a=await web3.eth.getBlock(10);
     console.log(a);
-    fs.readFile('lib/config.json',function(err,data){
-        if(err){
-            return console.error(err.stack);
-        }
-        var person = data.toString();//将二进制的数据转换为字符串
-        person = JSON.parse(person);//将字符串转换为json对象
-        person.contractaddress=a.miner;
-        var str = JSON.stringify(person);//因为nodejs的写入文件只认识字符串或者二进制数，所以把json对象转换成字符串重新写入json文件中
-        fs.writeFile('lib/config.json',str,function(err){
-            if(err){
-                console.error(err.stack);
-            }
-            console.log('----------新增成功-------------');
-        })
-    })
+    str={"contractaddress":a.miner};
+	str1=JSON.stringify(str)
+	console.log("正在写入合约地址 lib/contractaddress.json "+str1)
+	fs.writeFile('lib/contractaddress.json',str1,function(err){
+	if(err){
+		console.error(err.stack);
+		}
+		console.log('----------新增成功-------------');
+	})
+				
+    
 })()
 

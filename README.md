@@ -15,13 +15,19 @@ geth客户端编译
     cd go-ethereum
     build/env.sh go run build/ci.go install
 
+注意：
+
+- 编译好之后的客户端位于你当前目录的 ./build/bin/geth
+- 在上述环境变量的时候需要加入到你  ~/.bash_profile 或者 /etc/profile中
+
+
 CCC控制台编译启动
 
 >在编译之前需要安装相关node.
 
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
     cd tai/api/;nvm install v8.9 && npm install && node bin/www &
-    cd client;npm install && npm dev run
+    cd client;npm install && npm  run dev
 
 ## **CCC验证**
 查看相关端口
@@ -112,6 +118,21 @@ CCC控制台编译启动
 | `admin.addPeer(""）` | 添加节点 |
 | `admin.peers` | 查看新添加的节点 |
 | `net.peerCount` | 查看连接数 |
+
+
+## **合约部署**
+手动命令(存在ccc_setup.json)：
+
+    cd tai/api/
+    node lib/deploy.js
+
+单纯的启动geth
+
+    sh init_account.sh /tmp/new admin  8545 10086  99
+
+
+
+
 
 
 

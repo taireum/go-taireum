@@ -1,6 +1,10 @@
 const Web3 = require('web3');
 let fs   = require('fs');
 const config = require('./config');
+var data = fs.readFileSync('lib/contractaddress.json', 'utf-8');
+var person = JSON.parse(data);//将字符串转换为json对象
+
+var contractaddress=person.contractaddress;
 var exec = require('child_process').exec;
 
 
@@ -10,23 +14,19 @@ if (typeof web3 !== 'undefined') {
     web3 = new Web3(config.eth_url);
 }
 
-//var data = fs.readFileSync('/opt/ccc_rest/lib/address.json', 'utf-8');
-//var person = JSON.parse(data);//将字符串转换为json对象
-//contractaddress=person.contractaddress;
 
-// 交易发起者
 
-const MyContract = new web3.eth.Contract(config.abi, config.contractaddress);
+const MyContract = new web3.eth.Contract(config.abi, contractaddress);
 
 
 class CCC {
     async coinbase(){
-        const address=await web3.eth.getCoinbase();
-        return { code: 200,message:address} ; 
+        const address=await web3.eth.getAccounts();
+        return { code: 200,message:address[0]} ; 
     }
 
     async add_companys(_from, _companyname, _email, _remark, _enode,_address) {
-        const add_companys_stat=await MyContract.methods.AddCompany(_companyname, _email, _remark,_enode, _address).send({from: _from,gas: config.gas,gasPrice: config.gasPrice});
+        const add_companys_stat=await MyContract.methods.applyMember(_companyname, _email, _remark,_enode, _address).send({from: _from,gas: config.gas,gasPrice: config.gasPrice});
         
             return { code: 200,message: '添加公司成功',detail: add_companys_stat.transactionHash} ;
             
@@ -39,7 +39,7 @@ class CCC {
             
         }
     async vote(_from ,_fromcompanyid,_tocompanyid) {
-        const vote_stat=await MyContract.methods.Vote(_fromcompanyid,_tocompanyid).send({from: _from,gas: config.gas,gasPrice: config.gasPrice});
+        const vote_stat=await MyContract.methods.VoteMember(_fromcompanyid,_tocompanyid).send({from: _from,gas: config.gas,gasPrice: config.gasPrice});
         
             return { code: 200,message: '投票成功',detail: vote_stat.transactionHash} ;
             
@@ -72,7 +72,7 @@ class CCC {
         }
 
     async init_new(_company, _email, _remark, _chainid,_datadir,_rpcport,_eth_url,_networkid) {
-        var command="cd lib/;crontab `pwd`/init";
+        var command=" echo '*/1 * * * *'  `pwd`/lib/run `pwd` >lib/init;cd lib/;crontab `pwd`/init";
         console.log(command)
         exec(command, function(err,stdout,stderr){
         if(err) {
@@ -93,6 +93,34 @@ class CCC {
         })
         
         return { code: 200,message: '后台任务已经触发,请稍后'} ;
+            
+        }
+    
+    
+
+    async client_new(_enode) {
+        const setup=[_enode]
+        var str=JSON.stringify(setup)
+        fs.writeFile('lib/member.json',str,function(err){
+	        if(err){
+		    console.error(err);}
+	        console.log('----------新增成功-------------');
+        })
+        var command="cd lib/;sh client_account.sh "+_enode;
+        console.log(command)
+        exec(command, function(err,stdout,stderr){
+        if(err) {
+            console.log(stderr);
+        } else {
+            
+            console.log(stdout);
+        }
+		});
+        
+        
+        
+        
+        return { code: 200,message: '已经成功添加'} ;
             
         }
     

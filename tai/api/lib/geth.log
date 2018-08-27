@@ -1,0 +1,185 @@
+INFO [08-27|14:06:04] Maximum peer count                       ETH=25 LES=0 total=25
+Your new account is locked with a password. Please give a password. Do not forget this password.
+!! Unsupported terminal, password will be echoed.
+Passphrase: 
+Repeat passphrase: 
+Address: {a0b3a84347953155f5fcb3b2b44c7908d23adc9b}
+sed: 1: "genesis.json": extra characters at the end of g command
+INFO [08-27|14:06:13] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [08-27|14:06:13] Allocated cache and file handles         database=/tmp/new/geth/chaindata cache=16 handles=16
+INFO [08-27|14:06:13] Writing custom genesis block 
+INFO [08-27|14:06:13] Persisted trie from memory database      nodes=355 size=51.91kB time=1.754291ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [08-27|14:06:13] Successfully wrote genesis state         database=chaindata               hash=1b02be…0053f3
+INFO [08-27|14:06:13] Allocated cache and file handles         database=/tmp/new/geth/lightchaindata cache=16 handles=16
+INFO [08-27|14:06:13] Writing custom genesis block 
+INFO [08-27|14:06:13] Persisted trie from memory database      nodes=355 size=51.91kB time=1.017852ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [08-27|14:06:13] Successfully wrote genesis state         database=lightchaindata               hash=1b02be…0053f3
+启动进程
+INFO [08-27|14:06:15] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [08-27|14:06:15] Starting peer-to-peer node               instance=Geth/v1.8.12-unstable-a0b4e95d/darwin-amd64/go1.10.3
+INFO [08-27|14:06:15] Allocated cache and file handles         database=/tmp/new/geth/chaindata cache=768 handles=1024
+INFO [08-27|14:06:15] Initialised chain configuration          config="{ChainID: 30488 Homestead: 1 DAO: <nil> DAOSupport: false EIP150: 2 EIP155: 3 EIP158: 3 Byzantium: 4 Constantinople: <nil> Engine: tai}"
+INFO [08-27|14:06:15] Initialising Ethereum protocol           versions="[63 62]" network=99
+INFO [08-27|14:06:15] Loaded most recent local header          number=0 hash=1b02be…0053f3 td=1
+INFO [08-27|14:06:15] Loaded most recent local full block      number=0 hash=1b02be…0053f3 td=1
+INFO [08-27|14:06:15] Loaded most recent local fast block      number=0 hash=1b02be…0053f3 td=1
+INFO [08-27|14:06:15] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [08-27|14:06:15] Starting P2P networking 
+INFO [08-27|14:06:15] RLPx listener up                         self="enode://2c97f1b2341f33c97423a406a18521633ddca317d4efb6e9117d6f241c0be8bfe47706aff9a19bc81a2906d599ce6fa116eeca861d0a2a2734683d9dcf41ad48@[::]:30303?discport=0"
+INFO [08-27|14:06:15] IPC endpoint opened                      url=/tmp/new/geth.ipc
+INFO [08-27|14:06:15] HTTP endpoint opened                     url=http://127.0.0.1:8545 cors= vhosts=localhost
+INFO [08-27|14:06:16] Unlocked account                         address=0xA0B3A84347953155f5fCb3b2B44C7908D23adc9B
+INFO [08-27|14:06:16] Transaction pool price threshold updated price=18000000000
+INFO [08-27|14:06:16] Starting mining operation 
+INFO [08-27|14:06:16] Commit new mining work                   number=1 txs=0 uncles=0 elapsed=3.091ms
+INFO [08-27|14:06:16] Successfully sealed new block            number=1 hash=15474b…0fa627
+INFO [08-27|14:06:16] 🔨 mined potential block                  number=1 hash=15474b…0fa627
+INFO [08-27|14:06:16] Commit new mining work                   number=2 txs=0 uncles=0 elapsed=2.861ms
+INFO [08-27|14:06:20] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:20] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:20] Submitted contract creation              fullhash=0xbc8af3013cce1587963f20ca914f54914b572bfce568c1a100775efa63a199bb contract=0xaEF925f5b83368F037Ba8eCc1F97D0d6Ae104405
+INFO [08-27|14:06:20] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:21] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:23] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:24] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:25] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:26] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:27] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:28] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:29] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:30] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:31] Successfully sealed new block            number=2 hash=94bf3d…4b8510
+INFO [08-27|14:06:31] 🔨 mined potential block                  number=2 hash=94bf3d…4b8510
+INFO [08-27|14:06:31] Commit new mining work                   number=3 txs=1 uncles=0 elapsed=5.785ms
+INFO [08-27|14:06:31] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:32] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:33] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:34] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:35] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:36] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:37] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:38] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:39] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:40] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:41] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:42] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:43] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:44] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:45] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:46] Successfully sealed new block            number=3 hash=afeda5…d0a619
+INFO [08-27|14:06:46] 🔨 mined potential block                  number=3 hash=afeda5…d0a619
+INFO [08-27|14:06:46] Commit new mining work                   number=4 txs=0 uncles=0 elapsed=2.975ms
+INFO [08-27|14:06:47] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:47] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:47] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:47] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:06:47] Check permission for JSON-RPC Http request addr:  IPAddr=127.0.0.1
+INFO [08-27|14:07:01] Successfully sealed new block            number=4 hash=3ec0a6…7070a1
+INFO [08-27|14:07:01] 🔨 mined potential block                  number=4 hash=3ec0a6…7070a1
+INFO [08-27|14:07:01] Commit new mining work                   number=5 txs=0 uncles=0 elapsed=3.599ms
+INFO [08-27|14:07:16] Successfully sealed new block            number=5 hash=b23c6c…92daa5
+INFO [08-27|14:07:16] 🔨 mined potential block                  number=5 hash=b23c6c…92daa5
+INFO [08-27|14:07:16] Commit new mining work                   number=6 txs=0 uncles=0 elapsed=5.207ms
+INFO [08-27|14:07:31] Successfully sealed new block            number=6 hash=15862a…5f2604
+INFO [08-27|14:07:31] 🔗 block reached canonical chain          number=1 hash=15474b…0fa627
+INFO [08-27|14:07:31] 🔨 mined potential block                  number=6 hash=15862a…5f2604
+INFO [08-27|14:07:31] Commit new mining work                   number=7 txs=0 uncles=0 elapsed=4.857ms
+INFO [08-27|14:07:46] Successfully sealed new block            number=7 hash=1a9c8d…94510c
+INFO [08-27|14:07:46] 🔗 block reached canonical chain          number=2 hash=94bf3d…4b8510
+INFO [08-27|14:07:46] 🔨 mined potential block                  number=7 hash=1a9c8d…94510c
+INFO [08-27|14:07:46] Commit new mining work                   number=8 txs=0 uncles=0 elapsed=6.283ms
+INFO [08-27|14:08:01] Successfully sealed new block            number=8 hash=58ce0c…d25e40
+INFO [08-27|14:08:01] 🔗 block reached canonical chain          number=3 hash=afeda5…d0a619
+INFO [08-27|14:08:01] 🔨 mined potential block                  number=8 hash=58ce0c…d25e40
+INFO [08-27|14:08:01] Commit new mining work                   number=9 txs=0 uncles=0 elapsed=5.536ms
+INFO [08-27|14:08:16] Successfully sealed new block            number=9 hash=76e5a5…274f7b
+INFO [08-27|14:08:16] 🔗 block reached canonical chain          number=4 hash=3ec0a6…7070a1
+INFO [08-27|14:08:16] 🔨 mined potential block                  number=9 hash=76e5a5…274f7b
+INFO [08-27|14:08:16] Commit new mining work                   number=10 txs=0 uncles=0 elapsed=7.998ms
+INFO [08-27|14:08:31] Successfully sealed new block            number=10 hash=472ce6…1275b7
+INFO [08-27|14:08:31] 🔗 block reached canonical chain          number=5  hash=b23c6c…92daa5
+INFO [08-27|14:08:31] 🔨 mined potential block                  number=10 hash=472ce6…1275b7
+INFO [08-27|14:08:31] Commit new mining work                   number=11 txs=0 uncles=0 elapsed=5.102ms
+INFO [08-27|14:08:46] Successfully sealed new block            number=11 hash=2a0c1c…33b247
+INFO [08-27|14:08:46] 🔗 block reached canonical chain          number=6  hash=15862a…5f2604
+INFO [08-27|14:08:46] 🔨 mined potential block                  number=11 hash=2a0c1c…33b247
+INFO [08-27|14:08:46] Commit new mining work                   number=12 txs=0 uncles=0 elapsed=4.951ms
+INFO [08-27|14:09:01] Successfully sealed new block            number=12 hash=69e06c…48aad4
+INFO [08-27|14:09:01] 🔗 block reached canonical chain          number=7  hash=1a9c8d…94510c
+INFO [08-27|14:09:01] 🔨 mined potential block                  number=12 hash=69e06c…48aad4
+INFO [08-27|14:09:01] Commit new mining work                   number=13 txs=0 uncles=0 elapsed=5.346ms
+INFO [08-27|14:09:16] Successfully sealed new block            number=13 hash=834b0c…ae8f91
+INFO [08-27|14:09:16] 🔗 block reached canonical chain          number=8  hash=58ce0c…d25e40
+INFO [08-27|14:09:16] 🔨 mined potential block                  number=13 hash=834b0c…ae8f91
+INFO [08-27|14:09:16] Commit new mining work                   number=14 txs=0 uncles=0 elapsed=4.872ms
+INFO [08-27|14:09:31] Successfully sealed new block            number=14 hash=b03f2f…788e0d
+INFO [08-27|14:09:31] 🔗 block reached canonical chain          number=9  hash=76e5a5…274f7b
+INFO [08-27|14:09:31] 🔨 mined potential block                  number=14 hash=b03f2f…788e0d
+INFO [08-27|14:09:31] Commit new mining work                   number=15 txs=0 uncles=0 elapsed=20.210ms
+INFO [08-27|14:09:46] Successfully sealed new block            number=15 hash=085a27…c25849
+INFO [08-27|14:09:46] 🔗 block reached canonical chain          number=10 hash=472ce6…1275b7
+INFO [08-27|14:09:46] 🔨 mined potential block                  number=15 hash=085a27…c25849
+INFO [08-27|14:09:46] Commit new mining work                   number=16 txs=0 uncles=0 elapsed=154.089ms
+INFO [08-27|14:10:01] Successfully sealed new block            number=16 hash=b71e9f…ebbf4e
+INFO [08-27|14:10:01] 🔗 block reached canonical chain          number=11 hash=2a0c1c…33b247
+INFO [08-27|14:10:01] 🔨 mined potential block                  number=16 hash=b71e9f…ebbf4e
+INFO [08-27|14:10:01] Commit new mining work                   number=17 txs=0 uncles=0 elapsed=5.182ms
+INFO [08-27|14:10:16] Successfully sealed new block            number=17 hash=a3bf49…13b0b4
+INFO [08-27|14:10:16] 🔗 block reached canonical chain          number=12 hash=69e06c…48aad4
+INFO [08-27|14:10:16] 🔨 mined potential block                  number=17 hash=a3bf49…13b0b4
+INFO [08-27|14:10:16] Commit new mining work                   number=18 txs=0 uncles=0 elapsed=122.248ms
+INFO [08-27|14:10:31] Successfully sealed new block            number=18 hash=834308…b92acb
+INFO [08-27|14:10:31] 🔗 block reached canonical chain          number=13 hash=834b0c…ae8f91
+INFO [08-27|14:10:31] 🔨 mined potential block                  number=18 hash=834308…b92acb
+INFO [08-27|14:10:31] Commit new mining work                   number=19 txs=0 uncles=0 elapsed=4.473ms
+INFO [08-27|14:10:46] Successfully sealed new block            number=19 hash=fc9dda…416635
+INFO [08-27|14:10:46] 🔗 block reached canonical chain          number=14 hash=b03f2f…788e0d
+INFO [08-27|14:10:46] 🔨 mined potential block                  number=19 hash=fc9dda…416635
+INFO [08-27|14:10:46] Commit new mining work                   number=20 txs=0 uncles=0 elapsed=11.409ms
+INFO [08-27|14:11:01] Successfully sealed new block            number=20 hash=4d3fd8…d52c99
+INFO [08-27|14:11:01] 🔗 block reached canonical chain          number=15 hash=085a27…c25849
+INFO [08-27|14:11:01] 🔨 mined potential block                  number=20 hash=4d3fd8…d52c99
+INFO [08-27|14:11:01] Commit new mining work                   number=21 txs=0 uncles=0 elapsed=4.742ms
+INFO [08-27|14:11:16] Successfully sealed new block            number=21 hash=4b2e96…0074e3
+INFO [08-27|14:11:16] 🔗 block reached canonical chain          number=16 hash=b71e9f…ebbf4e
+INFO [08-27|14:11:16] 🔨 mined potential block                  number=21 hash=4b2e96…0074e3
+INFO [08-27|14:11:16] Commit new mining work                   number=22 txs=0 uncles=0 elapsed=4.724ms
+INFO [08-27|14:11:31] Successfully sealed new block            number=22 hash=9c96e4…d62c07
+INFO [08-27|14:11:31] 🔗 block reached canonical chain          number=17 hash=a3bf49…13b0b4
+INFO [08-27|14:11:31] 🔨 mined potential block                  number=22 hash=9c96e4…d62c07
+INFO [08-27|14:11:31] Commit new mining work                   number=23 txs=0 uncles=0 elapsed=5.662ms
+INFO [08-27|14:11:46] Successfully sealed new block            number=23 hash=797b7a…21a694
+INFO [08-27|14:11:46] 🔗 block reached canonical chain          number=18 hash=834308…b92acb
+INFO [08-27|14:11:46] 🔨 mined potential block                  number=23 hash=797b7a…21a694
+INFO [08-27|14:11:46] Commit new mining work                   number=24 txs=0 uncles=0 elapsed=5.780ms
+INFO [08-27|14:12:01] Successfully sealed new block            number=24 hash=d588ed…56fc1f
+INFO [08-27|14:12:01] 🔗 block reached canonical chain          number=19 hash=fc9dda…416635
+INFO [08-27|14:12:01] 🔨 mined potential block                  number=24 hash=d588ed…56fc1f
+INFO [08-27|14:12:01] Commit new mining work                   number=25 txs=0 uncles=0 elapsed=6.068ms
+INFO [08-27|14:12:15] Successfully sealed new block            number=25 hash=383971…8fc3c4
+INFO [08-27|14:12:15] 🔗 block reached canonical chain          number=20 hash=4d3fd8…d52c99
+INFO [08-27|14:12:15] Mining too far in the future             wait=2s
+INFO [08-27|14:12:15] 🔨 mined potential block                  number=25 hash=383971…8fc3c4
+INFO [08-27|14:12:18] Commit new mining work                   number=26 txs=0 uncles=0 elapsed=2.084s
+INFO [08-27|14:12:31] Successfully sealed new block            number=26 hash=6ca7cc…a8723e
+INFO [08-27|14:12:31] 🔗 block reached canonical chain          number=21 hash=4b2e96…0074e3
+INFO [08-27|14:12:31] 🔨 mined potential block                  number=26 hash=6ca7cc…a8723e
+INFO [08-27|14:12:31] Commit new mining work                   number=27 txs=0 uncles=0 elapsed=8.380ms
+INFO [08-27|14:12:46] Successfully sealed new block            number=27 hash=0d366f…396df6
+INFO [08-27|14:12:46] 🔗 block reached canonical chain          number=22 hash=9c96e4…d62c07
+INFO [08-27|14:12:46] 🔨 mined potential block                  number=27 hash=0d366f…396df6
+panic: runtime error: integer divide by zero
+
+goroutine 74 [running]:
+github.com/ethereum/go-ethereum/consensus/tai.(*Authority).hostturn(0x553fd00, 0x1c, 0x5531954743a8b3a0, 0x8794cb4b2b3fcf5, 0xc49bdc3ad2, 0xc42072d610)
+	/opt/go-ethereum/build/_workspace/src/github.com/ethereum/go-ethereum/consensus/tai/authority.go:85 +0xdb
+github.com/ethereum/go-ethereum/consensus/tai.(*Tai).calcDifficulty(0xc4200e46c0, 0x1c, 0x8)
+	/opt/go-ethereum/build/_workspace/src/github.com/ethereum/go-ethereum/consensus/tai/tai.go:371 +0x63
+github.com/ethereum/go-ethereum/consensus/tai.(*Tai).Prepare(0xc4200e46c0, 0x4cd4280, 0xc420326000, 0xc42059ad80, 0xf66d39f81813eacb, 0x5)
+	/opt/go-ethereum/build/_workspace/src/github.com/ethereum/go-ethereum/consensus/tai/tai.go:347 +0x2f0
+github.com/ethereum/go-ethereum/miner.(*worker).commitNewWork(0xc42011cc60)
+	/opt/go-ethereum/build/_workspace/src/github.com/ethereum/go-ethereum/miner/worker.go:421 +0x7ba
+github.com/ethereum/go-ethereum/miner.(*worker).update(0xc42011cc60)
+	/opt/go-ethereum/build/_workspace/src/github.com/ethereum/go-ethereum/miner/worker.go:254 +0x781
+created by github.com/ethereum/go-ethereum/miner.newWorker
+	/opt/go-ethereum/build/_workspace/src/github.com/ethereum/go-ethereum/miner/worker.go:158 +0x4ae
