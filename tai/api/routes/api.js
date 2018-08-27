@@ -39,6 +39,13 @@ router.get('/coinbase', async (ctx, next) =>{
   ctx.body = await c.coinbase();
 })
 
+// response rpc whitelist
+router.get('/rpc', function (ctx, next) {
+    var data = fs.readFileSync('lib/rpc.json', 'utf-8');
+    ipList = JSON.parse(data);//将字符串转换为json对象
+
+    ctx.body = ipList
+})
 
 router.post('/v1', async (ctx, next) => {
  

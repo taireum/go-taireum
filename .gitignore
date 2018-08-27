@@ -46,3 +46,6 @@ profile.cov
 
 **/yarn-error.log
 **/.log
+
+#npm
+node_modules/
