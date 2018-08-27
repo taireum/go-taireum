@@ -21,7 +21,7 @@ CCC控制台编译启动
 
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
     cd tai/api/;nvm install v8.9 && npm install && node bin/www &
-    cd client;npm install && npm dev run
+    cd client;npm install && npm  run dev
 
 ## **CCC验证**
 查看相关端口
