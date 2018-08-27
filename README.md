@@ -134,20 +134,21 @@ CCC控制台编译启动
 json部署
 
     http://127.0.0.1:8421/api/v1
-    {
-    "source": "ccc",
-    "method": "setup",
-    "argv": {
-      "_company":"小泰科技",
-      "_remark":"测试",
-      "_email":"979857108@qq.com",
-      "_chainid":10086,
-      "_datadir":"/tmp/new",
-      "_rpcport":8545,
-      "_networkid":99,
-      "_eth_url":"http://localhost:8545"
+
+        {
+        "source": "ccc",
+        "method": "setup",
+        "argv": {
+        "_company":"小泰科技",
+        "_remark":"测试",
+        "_email":"979857108@qq.com",
+        "_chainid":10086,
+        "_datadir":"/tmp/new",
+        "_rpcport":8545,
+        "_networkid":99,
+        "_eth_url":"http://localhost:8545"
+            }
         }
-    }
 
 
 
