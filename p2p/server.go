@@ -33,6 +33,7 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/discv5"
 	"github.com/ethereum/go-ethereum/p2p/nat"
 	"github.com/ethereum/go-ethereum/p2p/netutil"
+	"github.com/ethereum/go-ethereum/tai"
 )
 
 const (
@@ -848,12 +849,10 @@ func (srv *Server) setupConn(c *conn, flags connFlag, dialDest *discover.Node) e
 		}
 
 		//log.Error("entry permission check.")
-		if !isNodePermissioned(node, currentNode, srv.DataDir, direction) {
+		if !tai.IsP2pNodePermissioned(node, currentNode, srv.DataDir, direction) {
 			//log.Error("permission check failed.")
 			return DiscPermissionFailed
 		}
-
-
 	//END Permissioning
 
 	clog := srv.log.New("id", c.id, "addr", c.fd.RemoteAddr(), "conn", c.flags)
