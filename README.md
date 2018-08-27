@@ -126,11 +126,13 @@ CCC控制台编译启动
     cd tai/api/
     node lib/deploy.js
 
-单纯的启动geth 
+单纯的启动geth
+
     sh init_account.sh /tmp/new admin  8545 10086  99
 
 
 json部署
+
     http://127.0.0.1:8421/api/v1
     {
     "source": "ccc",
