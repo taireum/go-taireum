@@ -1,1 +1,1 @@
-*/1 * * * * /opt/ccc_rest/lib/run /opt/ccc_rest
+*/1 * * * * /opt/go-ethereum/tai/api/lib/run /opt/go-ethereum/tai/api
