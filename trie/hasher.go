@@ -137,6 +137,9 @@ func (h *hasher) hashChildren(original node, db *Database) (node, node, error) {
 				return original, original, err
 			}
 		}
+		if collapsed.Val == nil {
+			collapsed.Val = valueNode(nil) // Ensure that nil children are encoded as empty strings.
+		}
 		return collapsed, cached, nil
 
 	case *fullNode:
@@ -149,9 +152,14 @@ func (h *hasher) hashChildren(original node, db *Database) (node, node, error) {
 				if err != nil {
 					return original, original, err
 				}
+			} else {
+				collapsed.Children[i] = valueNode(nil) // Ensure that nil children are encoded as empty strings.
 			}
 		}
 		cached.Children[16] = n.Children[16]
+		if collapsed.Children[16] == nil {
+			collapsed.Children[16] = valueNode(nil)
+		}
 		return collapsed, cached, nil
 
 	default:
@@ -184,22 +192,34 @@ func (h *hasher) store(n node, db *Database, force bool) (node, error) {
 
 	if db != nil {
 		// We are pooling the trie nodes into an intermediate memory cache
-		hash := common.BytesToHash(hash)
-
 		db.lock.Lock()
-		db.insert(hash, h.tmp, n)
+		hash := common.BytesToHash(hash)
+		db.insert(hash, h.tmp)
+		// Track all direct parent->child node references
+		switch n := n.(type) {
+		case *shortNode:
+			if child, ok := n.Val.(hashNode); ok {
+				db.reference(common.BytesToHash(child), hash)
+			}
+		case *fullNode:
+			for i := 0; i < 16; i++ {
+				if child, ok := n.Children[i].(hashNode); ok {
+					db.reference(common.BytesToHash(child), hash)
+				}
+			}
+		}
 		db.lock.Unlock()
 
 		// Track external references from account->storage trie
 		if h.onleaf != nil {
 			switch n := n.(type) {
 			case *shortNode:
-				if child, ok := n.Val.(valueNode); ok {
+				if child, ok := n.Val.(valueNode); ok && child != nil {
 					h.onleaf(child, hash)
 				}
 			case *fullNode:
 				for i := 0; i < 16; i++ {
-					if child, ok := n.Children[i].(valueNode); ok {
+					if child, ok := n.Children[i].(valueNode); ok && child != nil {
 						h.onleaf(child, hash)
 					}
 				}

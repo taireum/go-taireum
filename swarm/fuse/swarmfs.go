@@ -39,12 +39,12 @@ var (
 )
 
 type SwarmFS struct {
-	swarmApi     *api.API
+	swarmApi     *api.Api
 	activeMounts map[string]*MountInfo
 	swarmFsLock  *sync.RWMutex
 }
 
-func NewSwarmFS(api *api.API) *SwarmFS {
+func NewSwarmFS(api *api.Api) *SwarmFS {
 	swarmfsLock.Do(func() {
 		swarmfs = &SwarmFS{
 			swarmApi:     api,

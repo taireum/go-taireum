@@ -8,7 +8,7 @@ router.prefix('/api');
 const c = new C;
 
 router.get('/contrac', function(ctx, next){
-  var data = fs.readFileSync('lib/contractaddress.json', 'utf-8');
+  var data = fs.readFileSync('lib/config.json', 'utf-8');
   person = JSON.parse(data);//将字符串转换为json对象
 
   ctx.body =  [ person.contractaddress]

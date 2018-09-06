@@ -42,7 +42,6 @@ var (
 	nodeDBNilNodeID      = NodeID{}       // Special node ID to use as a nil element.
 	nodeDBNodeExpiration = 24 * time.Hour // Time after which an unseen node should be dropped.
 	nodeDBCleanupCycle   = time.Hour      // Time period for running the expiration task.
-	nodeDBVersion        = 5
 )
 
 // nodeDB stores all nodes we know about.
@@ -258,7 +257,7 @@ func (db *nodeDB) expireNodes() error {
 		}
 		// Skip the node if not expired yet (and not self)
 		if !bytes.Equal(id[:], db.self[:]) {
-			if seen := db.lastPongReceived(id); seen.After(threshold) {
+			if seen := db.bondTime(id); seen.After(threshold) {
 				continue
 			}
 		}
@@ -268,28 +267,29 @@ func (db *nodeDB) expireNodes() error {
 	return nil
 }
 
-// lastPingReceived retrieves the time of the last ping packet sent by the remote node.
-func (db *nodeDB) lastPingReceived(id NodeID) time.Time {
+// lastPing retrieves the time of the last ping packet send to a remote node,
+// requesting binding.
+func (db *nodeDB) lastPing(id NodeID) time.Time {
 	return time.Unix(db.fetchInt64(makeKey(id, nodeDBDiscoverPing)), 0)
 }
 
-// updateLastPing updates the last time remote node pinged us.
-func (db *nodeDB) updateLastPingReceived(id NodeID, instance time.Time) error {
+// updateLastPing updates the last time we tried contacting a remote node.
+func (db *nodeDB) updateLastPing(id NodeID, instance time.Time) error {
 	return db.storeInt64(makeKey(id, nodeDBDiscoverPing), instance.Unix())
 }
 
-// lastPongReceived retrieves the time of the last successful pong from remote node.
-func (db *nodeDB) lastPongReceived(id NodeID) time.Time {
+// bondTime retrieves the time of the last successful pong from remote node.
+func (db *nodeDB) bondTime(id NodeID) time.Time {
 	return time.Unix(db.fetchInt64(makeKey(id, nodeDBDiscoverPong)), 0)
 }
 
 // hasBond reports whether the given node is considered bonded.
 func (db *nodeDB) hasBond(id NodeID) bool {
-	return time.Since(db.lastPongReceived(id)) < nodeDBNodeExpiration
+	return time.Since(db.bondTime(id)) < nodeDBNodeExpiration
 }
 
-// updateLastPongReceived updates the last pong time of a node.
-func (db *nodeDB) updateLastPongReceived(id NodeID, instance time.Time) error {
+// updateBondTime updates the last pong time of a node.
+func (db *nodeDB) updateBondTime(id NodeID, instance time.Time) error {
 	return db.storeInt64(makeKey(id, nodeDBDiscoverPong), instance.Unix())
 }
 
@@ -332,7 +332,7 @@ seek:
 		if n.ID == db.self {
 			continue seek
 		}
-		if now.Sub(db.lastPongReceived(n.ID)) > maxAge {
+		if now.Sub(db.bondTime(n.ID)) > maxAge {
 			continue seek
 		}
 		for i := range nodes {

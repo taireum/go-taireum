@@ -48,10 +48,7 @@ var DefaultConfig = Config{
 	DatabaseCache: 768,
 	TrieCache:     256,
 	TrieTimeout:   60 * time.Minute,
-	MinerGasFloor: 8000000,
-	MinerGasCeil:  8000000,
-	MinerGasPrice: big.NewInt(params.GWei),
-	MinerRecommit: 3 * time.Second,
+	GasPrice:      big.NewInt(18 * params.Shannon),
 
 	TxPool: core.DefaultTxPoolConfig,
 	GPO: gasprice.Config{
@@ -98,14 +95,10 @@ type Config struct {
 	TrieTimeout        time.Duration
 
 	// Mining-related options
-	Etherbase      common.Address `toml:",omitempty"`
-	MinerNotify    []string       `toml:",omitempty"`
-	MinerExtraData []byte         `toml:",omitempty"`
-	MinerGasFloor  uint64
-	MinerGasCeil   uint64
-	MinerGasPrice  *big.Int
-	MinerRecommit  time.Duration
-	MinerNoverify  bool
+	Etherbase    common.Address `toml:",omitempty"`
+	MinerThreads int            `toml:",omitempty"`
+	ExtraData    []byte         `toml:",omitempty"`
+	GasPrice     *big.Int
 
 	// Ethash options
 	Ethash ethash.Config
@@ -124,5 +117,5 @@ type Config struct {
 }
 
 type configMarshaling struct {
-	MinerExtraData hexutil.Bytes
+	ExtraData hexutil.Bytes
 }

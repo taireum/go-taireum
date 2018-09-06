@@ -84,7 +84,7 @@ func (r *testerChainReader) GetHeaderByNumber(number uint64) *types.Header {
 	if number == 0 {
 		return rawdb.ReadHeader(r.db, rawdb.ReadCanonicalHash(r.db, 0), 0)
 	}
-	return nil
+	panic("not supported")
 }
 
 // Tests that voting is evaluated correctly for various simple and complex scenarios.
@@ -360,7 +360,7 @@ func TestVoting(t *testing.T) {
 		for j, vote := range tt.votes {
 			headers[j] = &types.Header{
 				Number:   big.NewInt(int64(j) + 1),
-				Time:     big.NewInt(int64(j) * 15),
+				Time:     big.NewInt(int64(j) * int64(blockPeriod)),
 				Coinbase: accounts.address(vote.voted),
 				Extra:    make([]byte, extraVanity+extraSeal),
 			}

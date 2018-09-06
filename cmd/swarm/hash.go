@@ -18,7 +18,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"os"
 
@@ -39,11 +38,11 @@ func hash(ctx *cli.Context) {
 	defer f.Close()
 
 	stat, _ := f.Stat()
-	fileStore := storage.NewFileStore(storage.NewMapChunkStore(), storage.NewFileStoreParams())
-	addr, _, err := fileStore.Store(context.TODO(), f, stat.Size(), false)
+	chunker := storage.NewTreeChunker(storage.NewChunkerParams())
+	key, err := chunker.Split(f, stat.Size(), nil, nil, nil)
 	if err != nil {
 		utils.Fatalf("%v\n", err)
 	} else {
-		fmt.Printf("%v\n", addr)
+		fmt.Printf("%v\n", key)
 	}
 }

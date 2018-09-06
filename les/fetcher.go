@@ -267,16 +267,9 @@ func (f *lightFetcher) announce(p *peer, head *announceData) {
 		}
 		n = n.parent
 	}
-	// n is now the reorg common ancestor, add a new branch of nodes
-	if n != nil && (head.Number >= n.number+maxNodeCount || head.Number <= n.number) {
-		// if announced head block height is lower or same as n or too far from it to add
-		// intermediate nodes then discard previous announcement info and trigger a resync
-		n = nil
-		fp.nodeCnt = 0
-		fp.nodeByHash = make(map[common.Hash]*fetcherTreeNode)
-	}
 	if n != nil {
-		// check if the node count is too high to add new nodes, discard oldest ones if necessary
+		// n is now the reorg common ancestor, add a new branch of nodes
+		// check if the node count is too high to add new nodes
 		locked := false
 		for uint64(fp.nodeCnt)+head.Number-n.number > maxNodeCount && fp.root != nil {
 			if !locked {

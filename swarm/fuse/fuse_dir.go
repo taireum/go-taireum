@@ -25,7 +25,6 @@ import (
 
 	"bazil.org/fuse"
 	"bazil.org/fuse/fs"
-	"github.com/ethereum/go-ethereum/swarm/log"
 	"golang.org/x/net/context"
 )
 
@@ -50,7 +49,6 @@ type SwarmDir struct {
 }
 
 func NewSwarmDir(fullpath string, minfo *MountInfo) *SwarmDir {
-	log.Debug("swarmfs", "NewSwarmDir", fullpath)
 	newdir := &SwarmDir{
 		inode:       NewInode(),
 		name:        filepath.Base(fullpath),
@@ -64,8 +62,6 @@ func NewSwarmDir(fullpath string, minfo *MountInfo) *SwarmDir {
 }
 
 func (sd *SwarmDir) Attr(ctx context.Context, a *fuse.Attr) error {
-	sd.lock.RLock()
-	defer sd.lock.RUnlock()
 	a.Inode = sd.inode
 	a.Mode = os.ModeDir | 0700
 	a.Uid = uint32(os.Getuid())
@@ -74,7 +70,7 @@ func (sd *SwarmDir) Attr(ctx context.Context, a *fuse.Attr) error {
 }
 
 func (sd *SwarmDir) Lookup(ctx context.Context, req *fuse.LookupRequest, resp *fuse.LookupResponse) (fs.Node, error) {
-	log.Debug("swarmfs", "Lookup", req.Name)
+
 	for _, n := range sd.files {
 		if n.name == req.Name {
 			return n, nil
@@ -89,7 +85,6 @@ func (sd *SwarmDir) Lookup(ctx context.Context, req *fuse.LookupRequest, resp *f
 }
 
 func (sd *SwarmDir) ReadDirAll(ctx context.Context) ([]fuse.Dirent, error) {
-	log.Debug("swarmfs ReadDirAll")
 	var children []fuse.Dirent
 	for _, file := range sd.files {
 		children = append(children, fuse.Dirent{Inode: file.inode, Type: fuse.DT_File, Name: file.name})
@@ -101,7 +96,6 @@ func (sd *SwarmDir) ReadDirAll(ctx context.Context) ([]fuse.Dirent, error) {
 }
 
 func (sd *SwarmDir) Create(ctx context.Context, req *fuse.CreateRequest, resp *fuse.CreateResponse) (fs.Node, fs.Handle, error) {
-	log.Debug("swarmfs Create", "path", sd.path, "req.Name", req.Name)
 
 	newFile := NewSwarmFile(sd.path, req.Name, sd.mountInfo)
 	newFile.fileSize = 0 // 0 means, file is not in swarm yet and it is just created
@@ -114,7 +108,6 @@ func (sd *SwarmDir) Create(ctx context.Context, req *fuse.CreateRequest, resp *f
 }
 
 func (sd *SwarmDir) Remove(ctx context.Context, req *fuse.RemoveRequest) error {
-	log.Debug("swarmfs Remove", "path", sd.path, "req.Name", req.Name)
 
 	if req.Dir && sd.directories != nil {
 		newDirs := []*SwarmDir{}
@@ -151,11 +144,13 @@ func (sd *SwarmDir) Remove(ctx context.Context, req *fuse.RemoveRequest) error {
 }
 
 func (sd *SwarmDir) Mkdir(ctx context.Context, req *fuse.MkdirRequest) (fs.Node, error) {
-	log.Debug("swarmfs Mkdir", "path", sd.path, "req.Name", req.Name)
-	newDir := NewSwarmDir(filepath.Join(sd.path, req.Name), sd.mountInfo)
+
+	newDir := NewSwarmDir(req.Name, sd.mountInfo)
+
 	sd.lock.Lock()
 	defer sd.lock.Unlock()
 	sd.directories = append(sd.directories, newDir)
 
 	return newDir, nil
+
 }
