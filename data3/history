@@ -1,0 +1,3 @@
+miner.start(1)
+ls -al
+exir
