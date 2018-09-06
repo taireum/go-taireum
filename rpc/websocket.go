@@ -29,10 +29,14 @@ import (
 	"strings"
 	"time"
 
+	mapset "github.com/deckarep/golang-set"
 	"github.com/ethereum/go-ethereum/log"
 	"golang.org/x/net/websocket"
+<<<<<<< HEAD
 	"gopkg.in/fatih/set.v0"
 	"github.com/ethereum/go-ethereum/tai"
+=======
+>>>>>>> upstream/master
 )
 
 // websocketJSONCodec is a custom JSON codec with payload size enforcement and
@@ -85,7 +89,7 @@ func NewWSServer(allowedOrigins []string, srv *Server) *http.Server {
 // websocket upgrade process. When a '*' is specified as an allowed origins all
 // connections are accepted.
 func wsHandshakeValidator(allowedOrigins []string) func(*websocket.Config, *http.Request) error {
-	origins := set.New()
+	origins := mapset.NewSet()
 	allowAllOrigins := false
 
 	for _, origin := range allowedOrigins {
@@ -98,17 +102,18 @@ func wsHandshakeValidator(allowedOrigins []string) func(*websocket.Config, *http
 	}
 
 	// allow localhost if no allowedOrigins are specified.
-	if len(origins.List()) == 0 {
+	if len(origins.ToSlice()) == 0 {
 		origins.Add("http://localhost")
 		if hostname, err := os.Hostname(); err == nil {
 			origins.Add("http://" + strings.ToLower(hostname))
 		}
 	}
 
-	log.Debug(fmt.Sprintf("Allowed origin(s) for WS RPC interface %v\n", origins.List()))
+	log.Debug(fmt.Sprintf("Allowed origin(s) for WS RPC interface %v\n", origins.ToSlice()))
 
 	f := func(cfg *websocket.Config, req *http.Request) error {
 		origin := strings.ToLower(req.Header.Get("Origin"))
+<<<<<<< HEAD
 		if allowAllOrigins || origins.Has(origin) {
 			// Check JSON-RPC Websocket permission start
 			checkIp, _, err := net.SplitHostPort(req.RemoteAddr)
@@ -123,6 +128,9 @@ func wsHandshakeValidator(allowedOrigins []string) func(*websocket.Config, *http
 				return fmt.Errorf("websocket RPC permission forbidden for %s", checkIp)
 			}
 			// Check JSON-RPC Websocket permission end
+=======
+		if allowAllOrigins || origins.Contains(origin) {
+>>>>>>> upstream/master
 			return nil
 		}
 
