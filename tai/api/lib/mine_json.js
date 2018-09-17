@@ -24,8 +24,12 @@ if (typeof web3 !== 'undefined') {
 } else {
     web3 = new Web3(config.eth_url);
 }
+var data = fs.readFileSync('lib/contractaddress.json', 'utf-8');
+var person = JSON.parse(data);//将字符串转换为json对象
+
+var contractaddress=person.contractaddress;
  
-const MyContract = new web3.eth.Contract(config.abi, config.contractaddress);
+const MyContract = new web3.eth.Contract(config.abi, contractaddress);
     (async()=>{  
         const sum= await MyContract.methods.ShowSum().call({from: config.account});
         var array = [];　//创建一个数组  
